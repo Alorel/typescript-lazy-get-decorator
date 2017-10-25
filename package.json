@@ -5,6 +5,7 @@
   "main": "dist/LazyGetter.js",
   "es2015": "dist/esm2015/LazyGetter.js",
   "module": "dist/esm5/LazyGetter.js",
+  "typings": "dist/LazyGetter.d.ts",
   "scripts": {
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "clean": "rimraf ./dist",
@@ -20,18 +21,25 @@
   },
   "keywords": [
     "typescript",
-    "lazy",
+    "lazy get",
+    "lazy getter",
     "get",
-    "lazy",
-    "get",
+    "getter",
+    "cache",
+    "memoise",
+    "memoize",
     "decorator"
   ],
-  "author": "Arturas Molcanovas",
+  "author": {
+    "name": "Arturas Molcanovas",
+    "url": "https://alorel.github.io",
+    "email": "a.molcanovas@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Alorel/typescript-lazy-get-decorator/issues"
   },
-  "homepage": "https://github.com/Alorel/typescript-lazy-get-decorator#readme",
+  "homepage": "https://github.com/Alorel/typescript-lazy-get-decorator",
   "devDependencies": {
     "@types/node": "^8.0.47",
     "concurrently": "^3.5.0",
