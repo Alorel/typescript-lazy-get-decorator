@@ -13,7 +13,7 @@ test('Not a getter', t => {
   }, (e: Error) => e.message === '@LazyGetter can only decorate getters!')
 });
 
-test('Not a getter', t => {
+test('Not configurable', t => {
   t.throws(() => {
     class Test {
 
