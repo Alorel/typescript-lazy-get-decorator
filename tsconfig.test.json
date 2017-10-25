@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2015",
+    "moduleResolution": "node",
+    "noUnusedLocals": false,
+    "sourceMap": true,
+    "declaration": false,
+    "noImplicitAny": true,
+    "newLine": "lf",
+    "noFallthroughCasesInSwitch": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "removeComments": false,
+    "importHelpers": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "stripInternal": true,
+    "lib": [
+      "ES5",
+      "ES6",
+      "ES7",
+      "ES2015",
+      "ES2016",
+      "ES2017"
+    ],
+    "rootDir": "./test"
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "include": [
+    "./test/**/*.ts"
+  ]
+}

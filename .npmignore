@@ -4,3 +4,4 @@
 /*.tgz
 /.travis.yml
 /tsconfig.json
+/test/

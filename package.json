@@ -7,9 +7,12 @@
   "module": "dist/esm5/LazyGetter.js",
   "typings": "dist/LazyGetter.d.ts",
   "scripts": {
+    "clean:test": "rimraf ./test/*.js ./test/*.js.map ./lib/*.js ./lib/*.js.map",
+    "pretest": "npm run clean:test && tsc -p tsconfig.test.json",
+    "test": "ava --no-cache --color --verbose",
+    "posttest": "npm run clean:test",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
-    "clean": "rimraf ./dist",
-    "prebuild": "npm run clean",
+    "prebuild": "rimraf ./dist",
     "build": "concurrently \"npm run build:esm5\" \"npm run build:esm2015\" \"npm run build:es5\"",
     "build:esm5": "tsc --target es5 --module es2015 --outDir dist/esm5",
     "build:esm2015": "tsc --target es2015 --module es2015 --outDir dist/esm2015",
@@ -42,8 +45,10 @@
   "homepage": "https://github.com/Alorel/typescript-lazy-get-decorator",
   "devDependencies": {
     "@types/node": "^8.0.47",
+    "ava": "^0.23.0",
     "concurrently": "^3.5.0",
     "rimraf": "^2.6.2",
+    "tslib": "^1.8.0",
     "typescript": "^2.5.3"
   },
   "dependencies": {}
