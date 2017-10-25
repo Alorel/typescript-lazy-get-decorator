@@ -1,0 +1,42 @@
+{
+  "name": "typescript-lazy-get-decorator",
+  "version": "1.0.0",
+  "description": "Lazily evaluates a getter on an object and caches the returned value",
+  "main": "dist/LazyGetter.js",
+  "es2015": "dist/esm2015/LazyGetter.js",
+  "module": "dist/esm5/LazyGetter.js",
+  "scripts": {
+    "reinstall": "rm -rf node_modules package-lock.json && npm install",
+    "clean": "rimraf ./dist",
+    "prebuild": "npm run clean",
+    "build": "concurrently \"npm run build:esm5\" \"npm run build:esm2015\" \"npm run build:es5\"",
+    "build:esm5": "tsc --target es5 --module es2015 --outDir dist/esm5",
+    "build:esm2015": "tsc --target es2015 --module es2015 --outDir dist/esm2015",
+    "build:es5": "tsc --target es5 --module commonjs --outDir dist --declaration"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alorel/typescript-lazy-get-decorator.git"
+  },
+  "keywords": [
+    "typescript",
+    "lazy",
+    "get",
+    "lazy",
+    "get",
+    "decorator"
+  ],
+  "author": "Arturas Molcanovas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Alorel/typescript-lazy-get-decorator/issues"
+  },
+  "homepage": "https://github.com/Alorel/typescript-lazy-get-decorator#readme",
+  "devDependencies": {
+    "@types/node": "^8.0.47",
+    "concurrently": "^3.5.0",
+    "rimraf": "^2.6.2",
+    "typescript": "^2.5.3"
+  },
+  "dependencies": {}
+}

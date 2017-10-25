@@ -1,0 +1,3 @@
+# tmp travis before actual tests are set up
+language: generic
+script: true
