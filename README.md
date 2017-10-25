@@ -1,0 +1,1 @@
+# typescript-lazy-get-decorator
