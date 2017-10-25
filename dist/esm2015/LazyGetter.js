@@ -1,6 +1,6 @@
 /**
  * Evaluate the getter function and cache the result
- * @param {boolean} [setProto=false] x Set the value on the class prototype as well. Only applies to non-static getters.
+ * @param {boolean} [setProto=false] Set the value on the class prototype as well. Only applies to non-static getters.
  * @return {(target: any, key: string, descriptor: PropertyDescriptor) => void} A Typescript decorator function
  */
 export function LazyGetter(setProto = false) {
@@ -35,5 +35,4 @@ export function LazyGetter(setProto = false) {
     }
   };
 }
-
 //# sourceMappingURL=LazyGetter.js.map
