@@ -3,5 +3,7 @@
 /lib/
 /*.tgz
 /.travis.yml
-/tsconfig.json
+/tsconfig*.json
 /test/
+/coverage
+/.nyc_output

@@ -9,7 +9,7 @@
   "scripts": {
     "clean:test": "rimraf ./test/*.js ./test/*.js.map ./lib/*.js ./lib/*.js.map",
     "pretest": "npm run clean:test && tsc -p tsconfig.test.json",
-    "test": "ava --no-cache --color --verbose",
+    "test": "nyc ava --no-cache --color --verbose",
     "posttest": "npm run clean:test",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "prebuild": "rimraf ./dist",
@@ -47,6 +47,8 @@
     "@types/node": "^8.0.47",
     "ava": "^0.23.0",
     "concurrently": "^3.5.0",
+    "coveralls": "^3.0.0",
+    "nyc": "^11.2.1",
     "rimraf": "^2.6.2",
     "tslib": "^1.8.0",
     "typescript": "^2.5.3"
