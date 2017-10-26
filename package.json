@@ -24,7 +24,7 @@
     "watch:esm5": "tsc -p tsconfig.esm5.json --watch",
     "watch:esm2015": "tsc -p tsconfig.esm2015.json --watch",
     "watch:es5": "tsc -p tsconfig.es5.json --watch",
-    "prepublish": "node ./script/generate-npmignore.js"
+    "prepare": "node ./script/generate-npmignore.js"
   },
   "repository": {
     "type": "git",
