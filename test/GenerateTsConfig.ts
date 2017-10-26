@@ -1,5 +1,5 @@
 import test from 'ava';
-import {readFile, access, constants} from 'fs';
+import {access, constants, readFile} from 'fs';
 import {join, resolve} from 'path';
 import {get} from 'lodash';
 
@@ -8,7 +8,7 @@ const root: string = resolve(__dirname, '..');
 
 test.before('Generate', () => gen.promise);
 
-const createTest = (name:string, jsonPath?: string) => {
+const createTest = (name: string, jsonPath?: string) => {
   if (!jsonPath) {
     jsonPath = name;
   }
@@ -18,7 +18,7 @@ const createTest = (name:string, jsonPath?: string) => {
 
   test(`JSON path for ${jsonPath} exists`, t => t.truthy(json));
   test.cb(`${filename} exists`, t => {
-    access(path, constants.F_OK, (e:any) => {
+    access(path, constants.F_OK, (e: any) => {
       t.falsy(e);
 
       t.end();

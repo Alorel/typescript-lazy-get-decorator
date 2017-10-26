@@ -1,5 +1,5 @@
 import test from 'ava';
-import {resolve, basename, dirname, join} from 'path';
+import {basename, dirname, join, resolve} from 'path';
 import {access, constants} from 'fs';
 
 const pkg = require('../package.json');
@@ -22,7 +22,7 @@ for (const key of requireKeys) {
       const base = basename(path);
       const finalPath = join(dir, base + '.map');
 
-      access(finalPath, constants.F_OK, (e:Error) => {
+      access(finalPath, constants.F_OK, (e: Error) => {
         t.falsy(e);
         t.end();
       });
@@ -30,7 +30,7 @@ for (const key of requireKeys) {
   }
 
   test.cb(`File for key "${key}" exists`, t => {
-    access(path, constants.F_OK, (e:NodeJS.ErrnoException) => {
+    access(path, constants.F_OK, (e: NodeJS.ErrnoException) => {
       t.falsy(e);
       t.end();
     });
