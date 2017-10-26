@@ -9,7 +9,7 @@
   "scripts": {
     "generate:tsconfig": "node ./script/generate-tsconfig.js",
     "postinstall": "npm run generate:tsconfig",
-    "clean:test": "rimraf ./test/*.js ./test/*.js.map ./.nyc_output ./src/*.js ./src/*.js.map",
+    "clean:test": "concurrently \"rimraf ./test/*.js ./test/*.js.map ./src/*.js ./src/*.js.map\" \"node ./script/rm-nyc-output.js\"",
     "pretest": "concurrently \"npm run clean:test\" \"rimraf ./.nyc_output\" \"npm run generate:tsconfig\" && tsc -p tsconfig.test.json",
     "test": "nyc ava --no-cache --color --verbose",
     "posttest": "npm run clean:test",
