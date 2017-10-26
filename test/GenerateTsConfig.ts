@@ -19,11 +19,7 @@ const createTest = (name:string, jsonPath?: string) => {
   test(`JSON path for ${jsonPath} exists`, t => t.truthy(json));
   test.cb(`${filename} exists`, t => {
     access(path, constants.F_OK, (e:any) => {
-      if (e) {
-        t.fail();
-      } else {
-        t.pass();
-      }
+      t.falsy(e);
 
       t.end();
     });

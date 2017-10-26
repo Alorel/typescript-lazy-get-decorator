@@ -23,12 +23,7 @@ for (const key of requireKeys) {
       const finalPath = join(dir, base + '.map');
 
       access(finalPath, constants.F_OK, (e:Error) => {
-        if (e) {
-          t.fail(e.message);
-        } else {
-          t.pass();
-        }
-
+        t.falsy(e);
         t.end();
       });
     });
@@ -36,12 +31,7 @@ for (const key of requireKeys) {
 
   test.cb(`File for key "${key}" exists`, t => {
     access(path, constants.F_OK, (e:NodeJS.ErrnoException) => {
-      if (e) {
-        t.fail(e.message);
-      } else {
-        t.pass();
-      }
-
+      t.falsy(e);
       t.end();
     });
   });

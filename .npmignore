@@ -8,3 +8,5 @@
 /coverage/
 /.nyc_output/
 /tsconfig*.json
+/generate-npmignore.js
+/src/

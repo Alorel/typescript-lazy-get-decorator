@@ -23,7 +23,8 @@
     "watch": "concurrently \"npm run watch:esm5\" \"npm run watch:esm2015\" \"npm run watch:es5\"",
     "watch:esm5": "tsc -p tsconfig.esm5.json --watch",
     "watch:esm2015": "tsc -p tsconfig.esm2015.json --watch",
-    "watch:es5": "tsc -p tsconfig.es5.json --watch"
+    "watch:es5": "tsc -p tsconfig.es5.json --watch",
+    "prepublish": "node ./generate-npmignore.js"
   },
   "repository": {
     "type": "git",
@@ -67,6 +68,7 @@
   "nyc": {
     "exclude": [
       "**/generate-tsconfig.js",
+      "**/generate-npmignore.js",
       "**/test/**"
     ]
   }
