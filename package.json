@@ -6,6 +6,9 @@
   "es2015": "dist/esm2015/LazyGetter.js",
   "module": "dist/esm5/LazyGetter.js",
   "typings": "dist/es5/LazyGetter.d.ts",
+  "engines": {
+    "npm": ">=4.0.0"
+  },
   "scripts": {
     "generate:tsconfig": "node ./script/generate-tsconfig.js",
     "postinstall": "npm run generate:tsconfig",
