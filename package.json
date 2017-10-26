@@ -1,22 +1,29 @@
 {
   "name": "typescript-lazy-get-decorator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Lazily evaluates a getter on an object and caches the returned value",
-  "main": "dist/LazyGetter.js",
+  "main": "dist/es5/LazyGetter.js",
   "es2015": "dist/esm2015/LazyGetter.js",
   "module": "dist/esm5/LazyGetter.js",
-  "typings": "dist/LazyGetter.d.ts",
+  "typings": "dist/es5/LazyGetter.d.ts",
   "scripts": {
-    "clean:test": "rimraf ./test/*.js ./test/*.js.map ./lib/*.js ./lib/*.js.map",
-    "pretest": "npm run clean:test && tsc -p tsconfig.test.json",
+    "generate:tsconfig": "node ./generate-tsconfig.js",
+    "postinstall": "npm run generate:tsconfig",
+    "clean:test": "rimraf ./test/*.js ./test/*.js.map ./.nyc_output ./src/*.js ./src/*.js.map",
+    "pretest": "concurrently \"npm run clean:test\" \"rimraf ./.nyc_output\" \"npm run generate:tsconfig\" && tsc -p tsconfig.test.json",
     "test": "nyc ava --no-cache --color --verbose",
     "posttest": "npm run clean:test",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
-    "prebuild": "rimraf ./dist",
+    "prebuild": "concurrently \"rimraf ./dist\" \"npm run generate:tsconfig\"",
     "build": "concurrently \"npm run build:esm5\" \"npm run build:esm2015\" \"npm run build:es5\"",
-    "build:esm5": "tsc --target es5 --module es2015 --outDir dist/esm5",
-    "build:esm2015": "tsc --target es2015 --module es2015 --outDir dist/esm2015",
-    "build:es5": "tsc --target es5 --module commonjs --outDir dist --declaration"
+    "build:esm5": "tsc -p tsconfig.esm5.json",
+    "build:esm2015": "tsc -p tsconfig.esm2015.json",
+    "build:es5": "tsc -p tsconfig.es5.json",
+    "prewatch": "npm run generate:tsconfig",
+    "watch": "concurrently \"npm run watch:esm5\" \"npm run watch:esm2015\" \"npm run watch:es5\"",
+    "watch:esm5": "tsc -p tsconfig.esm5.json --watch",
+    "watch:esm2015": "tsc -p tsconfig.esm2015.json --watch",
+    "watch:es5": "tsc -p tsconfig.es5.json --watch"
   },
   "repository": {
     "type": "git",
@@ -44,14 +51,23 @@
   },
   "homepage": "https://github.com/Alorel/typescript-lazy-get-decorator",
   "devDependencies": {
+    "@types/lodash": "^4.14.80",
     "@types/node": "^8.0.47",
     "ava": "^0.23.0",
     "concurrently": "^3.5.0",
     "coveralls": "^3.0.0",
-    "nyc": "^11.2.1",
+    "cross-spawn": "^5.1.0",
+    "lodash": "^4.17.4",
+    "nyc": "^11.3",
     "rimraf": "^2.6.2",
     "tslib": "^1.8.0",
     "typescript": "^2.5.3"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "nyc": {
+    "exclude": [
+      "**/generate-tsconfig.js",
+      "**/test/**"
+    ]
+  }
 }

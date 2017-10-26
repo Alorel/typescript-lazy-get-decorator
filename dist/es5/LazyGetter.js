@@ -1,9 +1,10 @@
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Evaluate the getter function and cache the result
  * @param {boolean} [setProto=false] Set the value on the class prototype as well. Only applies to non-static getters.
  * @return {(target: any, key: string, descriptor: PropertyDescriptor) => void} A Typescript decorator function
  */
-export function LazyGetter(setProto) {
+function LazyGetter(setProto) {
     if (setProto === void 0) { setProto = false; }
     return function (target, key, descriptor) {
         if (!descriptor) {
@@ -36,4 +37,5 @@ export function LazyGetter(setProto) {
         }
     };
 }
+exports.LazyGetter = LazyGetter;
 //# sourceMappingURL=LazyGetter.js.map

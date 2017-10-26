@@ -4,35 +4,35 @@
  * @return {(target: any, key: string, descriptor: PropertyDescriptor) => void} A Typescript decorator function
  */
 export function LazyGetter(setProto = false) {
-  return (target, key, descriptor) => {
-    if (!descriptor) {
-      descriptor = Object.getOwnPropertyDescriptor(target, key);
-    }
-    const originalMethod = descriptor.get;
-    if (!originalMethod) {
-      throw new Error('@LazyGetter can only decorate getters!');
-    }
-    else if (!descriptor.configurable) {
-      throw new Error('@LazyGetter target must be configurable');
-    }
-    else {
-      descriptor.get = function () {
-        const value = originalMethod.apply(this, arguments);
-        const newDescriptor = {
-          value,
-          enumerable: descriptor.enumerable,
-          configurable: true
-        };
-        const isStatic = Object.getPrototypeOf(target) === Function.prototype;
-        if (isStatic || setProto) {
-          Object.defineProperty(target, key, newDescriptor);
+    return (target, key, descriptor) => {
+        if (!descriptor) {
+            descriptor = Object.getOwnPropertyDescriptor(target, key);
         }
-        if (!isStatic) {
-          Object.defineProperty(this, key, newDescriptor);
+        const originalMethod = descriptor.get;
+        if (!originalMethod) {
+            throw new Error('@LazyGetter can only decorate getters!');
         }
-        return value;
-      };
-    }
-  };
+        else if (!descriptor.configurable) {
+            throw new Error('@LazyGetter target must be configurable');
+        }
+        else {
+            descriptor.get = function () {
+                const value = originalMethod.apply(this, arguments);
+                const newDescriptor = {
+                    value,
+                    enumerable: descriptor.enumerable,
+                    configurable: true
+                };
+                const isStatic = Object.getPrototypeOf(target) === Function.prototype;
+                if (isStatic || setProto) {
+                    Object.defineProperty(target, key, newDescriptor);
+                }
+                if (!isStatic) {
+                    Object.defineProperty(this, key, newDescriptor);
+                }
+                return value;
+            };
+        }
+    };
 }
 //# sourceMappingURL=LazyGetter.js.map

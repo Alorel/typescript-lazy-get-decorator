@@ -1,5 +1,5 @@
 import test from 'ava';
-import {LazyGetter} from "../lib/LazyGetter";
+import {LazyGetter} from "../src/LazyGetter";
 import * as tslib from 'tslib';
 
 test('Not a getter', t => {
