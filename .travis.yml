@@ -9,7 +9,9 @@ cache:
 after_success:
   - "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls"
 
-before_deploy: npm install -g npm@next
+before_deploy:
+  - npm install -g npm@next
+  - npm run generate:npmignore
 
 deploy:
   provider: npm

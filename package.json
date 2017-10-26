@@ -6,9 +6,6 @@
   "es2015": "dist/esm2015/LazyGetter.js",
   "module": "dist/esm5/LazyGetter.js",
   "typings": "dist/es5/LazyGetter.d.ts",
-  "engines": {
-    "npm": ">=4.0.0"
-  },
   "scripts": {
     "generate:tsconfig": "node ./script/generate-tsconfig.js",
     "postinstall": "npm run generate:tsconfig",
@@ -27,7 +24,7 @@
     "watch:esm5": "tsc -p tsconfig.esm5.json --watch",
     "watch:esm2015": "tsc -p tsconfig.esm2015.json --watch",
     "watch:es5": "tsc -p tsconfig.es5.json --watch",
-    "prepare": "node ./script/generate-npmignore.js"
+    "generate:npmignore": "node ./script/generate-npmignore.js"
   },
   "repository": {
     "type": "git",
