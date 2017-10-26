@@ -3,7 +3,7 @@ import {readFile, access, constants} from 'fs';
 import {join, resolve} from 'path';
 import {get} from 'lodash';
 
-const gen: any = require('../generate-tsconfig.js');
+const gen: any = require('../script/generate-tsconfig.js');
 const root: string = resolve(__dirname, '..');
 
 test.before('Generate', () => gen.promise);

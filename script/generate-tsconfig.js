@@ -82,12 +82,13 @@ const dist = {
 };
 
 const {writeFile} = require('fs');
-const {resolve} = require('path');
+const {resolve, join} = require('path');
+const basedir = resolve(__dirname, '..');
 
 const write = (name, json) => new Promise((ok, err) => {
   json = JSON.stringify(json, null, 3) + "\n";
 
-  writeFile(resolve(__dirname, `tsconfig.${name}.json`), json, e => {
+  writeFile(join(basedir, `tsconfig.${name}.json`), json, e => {
     if (e) {
       err(e);
     } else {

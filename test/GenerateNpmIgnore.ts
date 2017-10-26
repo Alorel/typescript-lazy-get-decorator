@@ -12,7 +12,7 @@ test.before.cb('Prepare', t => {
   unlink(npmPath, () => {
     t.end();
 
-    require('../generate-npmignore.js');
+    require('../script/generate-npmignore.js');
   })
 });
 
@@ -42,5 +42,5 @@ test('Contents', async t => {
   const $git = rfp(gitignorePath);
   const $npm = rfp(npmPath);
 
-  t.is(await $npm, (await $git).trim() + `\n${['/generate-npmignore.js', '/src/'].join("\n")}\n`)
+  t.is(await $npm, (await $git).trim() + `\n${['/script/generate-npmignore.js', '/src/'].join("\n")}\n`)
 });
