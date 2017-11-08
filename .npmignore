@@ -5,9 +5,7 @@
 /src/
 /coverage/
 /.nyc_output/
-/script/generate-npmignore.js
 /tslint.json
 /tsconfig.*.json
 /.snyk
 /.travis.yml
-/script

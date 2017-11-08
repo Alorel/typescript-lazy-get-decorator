@@ -1,6 +1,5 @@
 # Typescript Lazy Getter
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/Alorel/typescript-lazy-get-decorator.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/Alorel/typescript-lazy-get-decorator.png?branch=master)](https://travis-ci.org/Alorel/typescript-lazy-get-decorator)
 [![Coverage Status](https://coveralls.io/repos/github/Alorel/typescript-lazy-get-decorator/badge.svg?branch=master)](https://coveralls.io/github/Alorel/typescript-lazy-get-decorator?branch=master)
 [![Dependency status](https://david-dm.org/alorel/typescript-lazy-get-decorator.svg)](https://david-dm.org/alorel/typescript-lazy-get-decorator#info=dependencies&view=list)
@@ -14,9 +13,10 @@
 /**
  * Evaluate the getter function and cache the result
  * @param {boolean} [setProto=false] Set the value on the class prototype as well. Only applies to non-static getters.
+ * @param {boolean} [makeNonConfigurable=false] Set to true to make the resolved property non-configurable
  * @return {(target: any, key: string, descriptor: PropertyDescriptor) => void} A Typescript decorator function
  */
-function LazyGetter(setProto: boolean = false) {}
+function LazyGetter(setProto: boolean = false, makeNonConfigurable = false) {}
 ```
 
 # Usage
