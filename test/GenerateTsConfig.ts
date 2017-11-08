@@ -1,9 +1,10 @@
+// tslint:disable:no-magic-numbers
 import test from 'ava';
 import {access, constants, readFile} from 'fs';
-import {join, resolve} from 'path';
 import {get} from 'lodash';
+import {join, resolve} from 'path';
+import gen = require('../script/generate-tsconfig.js');
 
-const gen: any = require('../script/generate-tsconfig.js');
 const root: string = resolve(__dirname, '..');
 
 test.before('Generate', () => gen.promise);
@@ -30,7 +31,7 @@ const createTest = (name: string, jsonPath?: string) => {
       if (err) {
         t.fail(err.message);
       } else {
-        t.is(strContents, JSON.stringify(json, null, 3) + "\n", "Contents match");
+        t.is(strContents, JSON.stringify(json, null, 3) + '\n', 'Contents match');
       }
 
       t.end();

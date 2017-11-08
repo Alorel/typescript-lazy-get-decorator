@@ -1,8 +1,10 @@
 import test from 'ava';
 import {access, readFile, unlink} from 'fs';
-import {basename, join, resolve} from "path";
+import {basename, join, resolve} from 'path';
 
-let rootPath: string, npmPath: string, gitignorePath: string;
+let rootPath: string;
+let npmPath: string;
+let gitignorePath: string;
 
 test.before.cb('Prepare', t => {
   rootPath = resolve(__dirname, '..');
@@ -13,7 +15,7 @@ test.before.cb('Prepare', t => {
     t.end();
 
     require('../script/generate-npmignore.js');
-  })
+  });
 });
 
 const exists = (name: string) => {
@@ -29,12 +31,12 @@ exists('.gitignore');
 exists('.npmignore');
 
 test('Contents', async t => {
-  const rfp = (path: string): Promise<string> => new Promise((resolve, reject) => {
+  const rfp = (path: string): Promise<string> => new Promise((rs, rj) => {
     readFile(path, 'utf8', (e: Error, d: string) => {
       if (e) {
-        reject(e);
+        rj(e);
       } else {
-        resolve(d);
+        rs(d);
       }
     });
   });
@@ -42,5 +44,5 @@ test('Contents', async t => {
   const $git = rfp(gitignorePath);
   const $npm = rfp(npmPath);
 
-  t.is(await $npm, (await $git).trim() + `\n${['/script/generate-npmignore.js', '/src/'].join("\n")}\n`)
+  t.is(await $npm, (await $git).trim() + `\n${['/script/generate-npmignore.js', '/src/'].join('\n')}\n`);
 });

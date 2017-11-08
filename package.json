@@ -1,6 +1,6 @@
 {
   "name": "typescript-lazy-get-decorator",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Lazily evaluates a getter on an object and caches the returned value",
   "main": "dist/es5/LazyGetter.js",
   "es2015": "dist/esm2015/LazyGetter.js",
@@ -8,7 +8,6 @@
   "typings": "dist/es5/LazyGetter.d.ts",
   "scripts": {
     "generate:tsconfig": "node ./script/generate-tsconfig.js",
-    "postinstall": "npm run generate:tsconfig",
     "clean:test": "rimraf ./test/*.js ./test/*.js.map ./src/*.js ./src/*.js.map",
     "pretest": "concurrently \"npm run clean:test\" \"rimraf ./.nyc_output\" \"npm run generate:tsconfig\" && tsc -p tsconfig.test.json",
     "test": "nyc ava --no-cache --color --verbose",
@@ -24,7 +23,11 @@
     "watch:esm5": "tsc -p tsconfig.esm5.json --watch",
     "watch:esm2015": "tsc -p tsconfig.esm2015.json --watch",
     "watch:es5": "tsc -p tsconfig.es5.json --watch",
-    "generate:npmignore": "node ./script/generate-npmignore.js"
+    "generate:npmignore": "node ./script/generate-npmignore.js",
+    "snyk:wizard": "snyk wizard --dev",
+    "prepare": "snyk protect",
+    "lint": "tslint -p ./tsconfig.base.json -s node_modules/custom-tslint-formatters/formatters -t grouped '**/*.ts'",
+    "lint:fix": "tslint --fix -p ./tsconfig.base.json -s node_modules/custom-tslint-formatters/formatters -t grouped '**/*.ts'"
   },
   "repository": {
     "type": "git",
@@ -58,10 +61,13 @@
     "concurrently": "^3.5.0",
     "coveralls": "^3.0.0",
     "cross-spawn": "^5.1.0",
+    "custom-tslint-formatters": "^2.1.1",
     "lodash": "^4.17.4",
     "nyc": "^11.3",
     "rimraf": "^2.6.2",
+    "snyk": "^1.49.1",
     "tslib": "^1.8.0",
+    "tslint": "^5.8.0",
     "typescript": "^2.5.3"
   },
   "dependencies": {},
@@ -70,6 +76,13 @@
       "**/generate-tsconfig.js",
       "**/generate-npmignore.js",
       "**/test/**"
+    ],
+    "report": [
+      "lcov",
+      "text",
+      "text-summary",
+      "html"
     ]
-  }
+  },
+  "snyk": true
 }

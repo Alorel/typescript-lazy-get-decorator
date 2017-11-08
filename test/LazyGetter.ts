@@ -1,48 +1,68 @@
+// tslint:disable:no-magic-numbers
 import test from 'ava';
-import {LazyGetter} from "../src/LazyGetter";
+import {LazyGetter} from '../src/LazyGetter';
 
 class MyTestClass {
 
-  static staticGets: number = 0;
-  static instanceGets: number = 0;
+  public static staticGets = 0;
+  public static instanceGets = 0;
 
   @LazyGetter(false)
-  static get staticGetterFalse(): number {
+  public static get staticGetterFalse(): number {
     MyTestClass.staticGets++;
+
     return 1;
   }
 
   @LazyGetter()
-  static get staticGetterDefault(): number {
+  public static get staticGetterDefault(): number {
     MyTestClass.staticGets++;
+
     return 1;
   }
 
   @LazyGetter(true)
-  static get staticGetterTrue(): number {
+  public static get staticGetterTrue(): number {
     MyTestClass.staticGets++;
+
     return 1;
   }
 
   @LazyGetter(true)
-  get instanceGetterTrue(): number {
+  public get instanceGetterTrue(): number {
     MyTestClass.instanceGets++;
+
     return 1;
   }
 
   @LazyGetter()
-  get instanceGetterDefault(): number {
+  public get instanceGetterDefault(): number {
     MyTestClass.instanceGets++;
+
     return 1;
   }
 
   @LazyGetter(false)
-  get instanceGetterFalse(): number {
+  public get instanceGetterFalse(): number {
     MyTestClass.instanceGets++;
+
+    return 1;
+  }
+
+  @LazyGetter(false, true)
+  public get lazyGetterNoConfig(): number {
+
+    return 1;
+  }
+
+  @LazyGetter(false)
+  public get lazyGetterConfig(): number {
+
     return 1;
   }
 }
 
+// tslint:disable-next-line:no-empty
 function noop(input: any) {
 
 }
@@ -140,4 +160,18 @@ test('Instance getter: true', t => {
 
   noop(inst2.instanceGetterTrue);
   t.is(MyTestClass.instanceGets, 1, '2nd instance gets still 1');
+});
+
+test('Configurable getter', t => {
+  const i = new MyTestClass();
+  noop(i.lazyGetterConfig);
+
+  t.true(Object.getOwnPropertyDescriptor(i, 'lazyGetterConfig').configurable);
+});
+
+test('Configurable getter', t => {
+  const i = new MyTestClass();
+  noop(i.lazyGetterNoConfig);
+
+  t.false(Object.getOwnPropertyDescriptor(i, 'lazyGetterNoConfig').configurable);
 });

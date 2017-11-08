@@ -1,20 +1,23 @@
 import test from 'ava';
-import {LazyGetter} from "../src/LazyGetter";
 import * as tslib from 'tslib';
+import {LazyGetter} from '../src/LazyGetter';
 
 test('Not a getter', t => {
   t.throws(() => {
+    // tslint:disable-next-line:no-unused-variable
     class Test {
 
       @LazyGetter()
-      notAGetter() {
+      // tslint:disable-next-line:no-empty
+      public notAGetter() {
       }
     }
-  }, (e: Error) => e.message === '@LazyGetter can only decorate getters!')
+  },       (e: Error) => e.message === '@LazyGetter can only decorate getters!');
 });
 
 test('Not configurable', t => {
   t.throws(() => {
+    // tslint:disable-next-line:max-classes-per-file
     class Test {
 
     }
@@ -32,5 +35,5 @@ test('Not configurable', t => {
       'foo',
       null
     );
-  }, (e: Error) => e.message === '@LazyGetter target must be configurable')
+  },       (e: Error) => e.message === '@LazyGetter target must be configurable');
 });

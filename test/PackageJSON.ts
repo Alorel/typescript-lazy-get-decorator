@@ -1,9 +1,7 @@
 import test from 'ava';
-import {basename, dirname, join, resolve} from 'path';
 import {access, constants} from 'fs';
-
-const pkg = require('../package.json');
-
+import {basename, dirname, join, resolve} from 'path';
+import pkg = require('../package.json');
 
 const requireKeys = [
   'main',

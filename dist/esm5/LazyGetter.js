@@ -1,10 +1,12 @@
 /**
  * Evaluate the getter function and cache the result
  * @param {boolean} [setProto=false] Set the value on the class prototype as well. Only applies to non-static getters.
+ * @param {boolean} [makeNonConfigurable=false] Set to true to make the resolved property non-configurable
  * @return {(target: any, key: string, descriptor: PropertyDescriptor) => void} A Typescript decorator function
  */
-export function LazyGetter(setProto) {
+export function LazyGetter(setProto, makeNonConfigurable) {
     if (setProto === void 0) { setProto = false; }
+    if (makeNonConfigurable === void 0) { makeNonConfigurable = false; }
     return function (target, key, descriptor) {
         if (!descriptor) {
             descriptor = Object.getOwnPropertyDescriptor(target, key);
@@ -20,9 +22,9 @@ export function LazyGetter(setProto) {
             descriptor.get = function () {
                 var value = originalMethod.apply(this, arguments);
                 var newDescriptor = {
-                    value: value,
+                    configurable: !makeNonConfigurable,
                     enumerable: descriptor.enumerable,
-                    configurable: true
+                    value: value
                 };
                 var isStatic = Object.getPrototypeOf(target) === Function.prototype;
                 if (isStatic || setProto) {

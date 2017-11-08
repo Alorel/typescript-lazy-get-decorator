@@ -7,4 +7,3 @@
 /src/*.js.map
 /coverage/
 /.nyc_output/
-/tsconfig*.json
