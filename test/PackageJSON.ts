@@ -1,7 +1,10 @@
 import test from 'ava';
-import {access, constants} from 'fs';
+import {access, constants, readFileSync} from 'fs';
 import {basename, dirname, join, resolve} from 'path';
-import pkg = require('../package.json');
+
+const pkgPath: string = resolve(__dirname, '..', 'package.json');
+const pkgString: string = readFileSync(pkgPath, 'utf8');
+const pkg: any = JSON.parse(pkgString);
 
 const requireKeys = [
   'main',

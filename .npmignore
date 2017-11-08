@@ -9,3 +9,4 @@
 /tsconfig.*.json
 /.snyk
 /.travis.yml
+/.nycrc

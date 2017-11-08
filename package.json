@@ -7,8 +7,8 @@
   "module": "dist/esm5/LazyGetter.js",
   "typings": "dist/es5/LazyGetter.d.ts",
   "scripts": {
-    "clean:test": "rimraf ./test/*.js ./test/*.js.map ./src/*.js ./src/*.js.map",
-    "pretest": "concurrently \"npm run clean:test\" \"rimraf ./.nyc_output\" && tsc -p tsconfig.test.json",
+    "clean:test": "rimraf ./test/*.js ./test/*.js.map ./.nyc_output ./src/*.js ./src/*.js.map",
+    "pretest": "concurrently \"npm run clean:test\" \"rimraf ./.coverage\" && tsc -p tsconfig.test.json",
     "test": "nyc ava --no-cache --color --verbose",
     "posttest": "npm run clean:test",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
@@ -68,18 +68,5 @@
     "typescript": "^2.5.3"
   },
   "dependencies": {},
-  "nyc": {
-    "exclude": [
-      "**/generate-tsconfig.js",
-      "**/generate-npmignore.js",
-      "**/test/**"
-    ],
-    "report": [
-      "lcov",
-      "text",
-      "text-summary",
-      "html"
-    ]
-  },
   "snyk": true
 }
