@@ -30,7 +30,8 @@ base: &base
 jobs:
   include:
     - <<: *base
-      if: env(GH_TOKEN)
+      if: env(GH_TOKEN) IS present
       after_script: greenkeeper-lockfile-upload
     - <<: *base
-      if: NOT env(GH_TOKEN)
+      before_install: echo No greenkeeper
+      if: env(GH_TOKEN) IS blank

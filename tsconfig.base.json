@@ -17,15 +17,7 @@
       "allowUnreachableCode": false,
       "allowUnusedLabels": false,
       "noImplicitUseStrict": true,
-      "stripInternal": true,
-      "lib": [
-         "ES5",
-         "ES6",
-         "ES7",
-         "ES2015",
-         "ES2016",
-         "ES2017"
-      ]
+      "stripInternal": true
    },
    "exclude": [
       "node_modules",
