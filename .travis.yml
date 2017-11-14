@@ -6,8 +6,13 @@ cache:
   directories:
     - node_modules
 
-after_success: cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+before_script: greenkeeper-lockfile-update
+after_success: cat ./coverage/lcov.info | coveralls
 before_cache: rm -rf ./node_modules/.cache
+
+after_script: if [ $GH_TOKEN ]; then greenkeeper-lockfile-upload; fi;
+
+before_deploy: npm run build
 
 script:
   - npm run lint
