@@ -22,7 +22,9 @@
     "watch:esm2015": "tsc -p tsconfig.esm2015.json --watch",
     "watch:es5": "tsc -p tsconfig.es5.json --watch",
     "lint": "tslint -p ./tsconfig.base.json -s node_modules/custom-tslint-formatters/formatters -t grouped '**/*.ts'",
-    "lint:fix": "tslint --fix -p ./tsconfig.base.json -s node_modules/custom-tslint-formatters/formatters -t grouped '**/*.ts'"
+    "lint:fix": "tslint --fix -p ./tsconfig.base.json -s node_modules/custom-tslint-formatters/formatters -t grouped '**/*.ts'",
+    "precommit": "npm run lint:fix",
+    "prepush": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -58,6 +60,7 @@
     "cross-spawn": "^5.1.0",
     "custom-tslint-formatters": "^2.1.1",
     "greenkeeper-lockfile": "^1.12.0",
+    "husky": "^0.14.3",
     "lodash": "^4.17.4",
     "nyc": "^11.3",
     "rimraf": "^2.6.2",
