@@ -1,8 +1,8 @@
-language: node_js
-node_js: 9
-
-env:
-  - secure: lrcamRswKcT06gpk6+oQshkkN2MmCAnACu3/yUoxHGeUX2lz8GkwKFFkrr5yhp33yjP0wkblI6WCq0kp+Avx/xNEP+yOr1KPi8RsUU+92deF2+0IImLol+IbTuUU8LzR+UUWrrLJ0A4HxtYhYw37CYkOjoom53YHySVe1RTUxHO4f/9NRBYj7TZcwPBTR2vdF+4twHbEZFW3Gwm4zK0JNDj5QECTIZvN564I3FD+9zHH4+4/05T0WeJXDJjhkz6fvb9wzT15YBr67cYNLsCRvOjC6soMYqWPq3QWpMU5Y3FIXr2xJHbusxIbHWwAVKvSTnkpKfSVonDL8hY/QMNYfVSoFhx1kt79CWHaJDkNCl/U6jBiebZPvBT2JoeblNPGn0AydsqCNhZJ6XCIL1+J0I8HaTvjWlByaitiiuWY7GbevnplZ76g4daQ+xd9c89i51LIQqP0qb6RI1c+P+wlf25SDNEi/ExdhNxnG5nAqM7G3a77n90zAhgypKLmsVGXXYBGOHVKLxcO+rXObGwEVdb2CACeJVl3mI4tFV6R4SUzW+U6kr0yKPFTFva9fPjcdsAPrKNu1hL005ldYvZDzFoQqFpFUoqeR17AANUXDmVWCih5eZ6o8JmessuTg+KM0VrKzLy/6Pr72F1VHY9Y1ExRag55t8JOZ6BzTV8qav8=
+#language: node_js
+#node_js: 9
+#
+#env:
+#  - secure: lrcamRswKcT06gpk6+oQshkkN2MmCAnACu3/yUoxHGeUX2lz8GkwKFFkrr5yhp33yjP0wkblI6WCq0kp+Avx/xNEP+yOr1KPi8RsUU+92deF2+0IImLol+IbTuUU8LzR+UUWrrLJ0A4HxtYhYw37CYkOjoom53YHySVe1RTUxHO4f/9NRBYj7TZcwPBTR2vdF+4twHbEZFW3Gwm4zK0JNDj5QECTIZvN564I3FD+9zHH4+4/05T0WeJXDJjhkz6fvb9wzT15YBr67cYNLsCRvOjC6soMYqWPq3QWpMU5Y3FIXr2xJHbusxIbHWwAVKvSTnkpKfSVonDL8hY/QMNYfVSoFhx1kt79CWHaJDkNCl/U6jBiebZPvBT2JoeblNPGn0AydsqCNhZJ6XCIL1+J0I8HaTvjWlByaitiiuWY7GbevnplZ76g4daQ+xd9c89i51LIQqP0qb6RI1c+P+wlf25SDNEi/ExdhNxnG5nAqM7G3a77n90zAhgypKLmsVGXXYBGOHVKLxcO+rXObGwEVdb2CACeJVl3mI4tFV6R4SUzW+U6kr0yKPFTFva9fPjcdsAPrKNu1hL005ldYvZDzFoQqFpFUoqeR17AANUXDmVWCih5eZ6o8JmessuTg+KM0VrKzLy/6Pr72F1VHY9Y1ExRag55t8JOZ6BzTV8qav8=
 
 base: &base
   language: node_js
@@ -31,8 +31,9 @@ base: &base
 jobs:
   include:
     - <<: *base
-      if: env(GH_TOKEN) IS present
+      if: type IN (push, cron)
+      env:
+        - secure: lrcamRswKcT06gpk6+oQshkkN2MmCAnACu3/yUoxHGeUX2lz8GkwKFFkrr5yhp33yjP0wkblI6WCq0kp+Avx/xNEP+yOr1KPi8RsUU+92deF2+0IImLol+IbTuUU8LzR+UUWrrLJ0A4HxtYhYw37CYkOjoom53YHySVe1RTUxHO4f/9NRBYj7TZcwPBTR2vdF+4twHbEZFW3Gwm4zK0JNDj5QECTIZvN564I3FD+9zHH4+4/05T0WeJXDJjhkz6fvb9wzT15YBr67cYNLsCRvOjC6soMYqWPq3QWpMU5Y3FIXr2xJHbusxIbHWwAVKvSTnkpKfSVonDL8hY/QMNYfVSoFhx1kt79CWHaJDkNCl/U6jBiebZPvBT2JoeblNPGn0AydsqCNhZJ6XCIL1+J0I8HaTvjWlByaitiiuWY7GbevnplZ76g4daQ+xd9c89i51LIQqP0qb6RI1c+P+wlf25SDNEi/ExdhNxnG5nAqM7G3a77n90zAhgypKLmsVGXXYBGOHVKLxcO+rXObGwEVdb2CACeJVl3mI4tFV6R4SUzW+U6kr0yKPFTFva9fPjcdsAPrKNu1hL005ldYvZDzFoQqFpFUoqeR17AANUXDmVWCih5eZ6o8JmessuTg+KM0VrKzLy/6Pr72F1VHY9Y1ExRag55t8JOZ6BzTV8qav8=
       after_script: greenkeeper-lockfile-upload
     - <<: *base
-      before_install: echo No greenkeeper
-      if: env(GH_TOKEN) IS blank
+      if: NOT type IN (push, cron)
