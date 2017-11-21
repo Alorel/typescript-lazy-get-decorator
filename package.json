@@ -1,6 +1,6 @@
 {
   "name": "typescript-lazy-get-decorator",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Lazily evaluates a getter on an object and caches the returned value",
   "main": "dist/es5/LazyGetter.js",
   "es2015": "dist/esm2015/LazyGetter.js",
