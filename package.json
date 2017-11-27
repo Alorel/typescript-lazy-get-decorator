@@ -54,7 +54,7 @@
   "devDependencies": {
     "@types/lodash": "^4.14.80",
     "@types/node": "^8.0.47",
-    "ava": "^0.23.0",
+    "ava": "^0.24.0",
     "concurrently": "^3.5.0",
     "coveralls": "^3.0.0",
     "cross-spawn": "^5.1.0",
