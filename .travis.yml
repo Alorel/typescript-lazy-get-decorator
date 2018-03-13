@@ -1,6 +1,6 @@
 base: &base
   language: node_js
-  node_js: 9
+  node_js: stable
   sudo: false
   cache:
     directories:

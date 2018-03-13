@@ -7,6 +7,6 @@
 /.nyc_output/
 /tslint.json
 /tsconfig.*.json
-/.snyk
 /.travis.yml
 /.nycrc
+/webpack.config.js

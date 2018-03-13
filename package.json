@@ -1,8 +1,9 @@
 {
   "name": "typescript-lazy-get-decorator",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Lazily evaluates a getter on an object and caches the returned value",
   "main": "dist/es5/LazyGetter.js",
+  "browser": "dist/umd/LazyGetter.js",
   "es2015": "dist/esm2015/LazyGetter.js",
   "module": "dist/esm5/LazyGetter.js",
   "typings": "dist/es5/LazyGetter.d.ts",
@@ -13,7 +14,8 @@
     "posttest": "npm run clean:test",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "prebuild": "rimraf ./dist",
-    "build": "concurrently \"npm run build:esm5\" \"npm run build:esm2015\" \"npm run build:es5\"",
+    "build": "concurrently \"npm run build:esm5\" \"npm run build:esm2015\" \"npm run build:es5\" \"npm run build:umd\"",
+    "build:umd": "webpack",
     "build:esm5": "tsc -p tsconfig.esm5.json",
     "build:esm2015": "tsc -p tsconfig.esm2015.json",
     "build:es5": "tsc -p tsconfig.es5.json",
@@ -21,10 +23,8 @@
     "watch:esm5": "tsc -p tsconfig.esm5.json --watch",
     "watch:esm2015": "tsc -p tsconfig.esm2015.json --watch",
     "watch:es5": "tsc -p tsconfig.es5.json --watch",
-    "lint": "tslint -p ./tsconfig.base.json -s node_modules/custom-tslint-formatters/formatters -t grouped '**/*.ts'",
-    "lint:fix": "tslint --fix -p ./tsconfig.base.json -s node_modules/custom-tslint-formatters/formatters -t grouped '**/*.ts'",
-    "precommit": "npm run lint:fix",
-    "prepush": "npm run lint"
+    "lint": "tslint -p ./tsconfig.base.json -s node_modules/custom-tslint-formatters/formatters -t grouped",
+    "lint:fix": "tslint --fix -p ./tsconfig.base.json -s node_modules/custom-tslint-formatters/formatters -t grouped"
   },
   "repository": {
     "type": "git",
@@ -52,22 +52,23 @@
   },
   "homepage": "https://github.com/Alorel/typescript-lazy-get-decorator",
   "devDependencies": {
-    "@types/lodash": "^4.14.80",
-    "@types/node": "^9.3.0",
+    "@types/lodash": "^4.14.104",
+    "@types/node": "^9.4.7",
     "ava": "^0.25.0",
+    "awesome-typescript-loader": "^4.0.1",
     "concurrently": "^3.5.0",
     "coveralls": "^3.0.0",
-    "cross-spawn": "^6.0.0",
-    "custom-tslint-formatters": "^2.1.1",
-    "greenkeeper-lockfile": "^1.12.0",
-    "husky": "^0.14.3",
-    "lodash": "^4.17.4",
-    "nyc": "^11.3",
+    "cross-spawn": "^6.0.5",
+    "custom-tslint-formatters": "^2.3.0",
+    "greenkeeper-lockfile": "^1.14.0",
+    "lodash": "^4.17.5",
+    "nyc": "^11.6.0",
     "rimraf": "^2.6.2",
-    "tslib": "^1.8.0",
-    "tslint": "^5.8.0",
-    "typescript": "^2.5.3"
+    "tslib": "^1.9.0",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.2",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.11"
   },
-  "dependencies": {},
-  "snyk": true
+  "dependencies": {}
 }
