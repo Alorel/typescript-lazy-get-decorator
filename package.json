@@ -1,6 +1,6 @@
 {
   "name": "typescript-lazy-get-decorator",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Lazily evaluates a getter on an object and caches the returned value",
   "main": "dist/es5/LazyGetter.js",
   "browser": "dist/umd/LazyGetter.js",
@@ -60,7 +60,6 @@
     "coveralls": "^3.0.0",
     "cross-spawn": "^6.0.5",
     "custom-tslint-formatters": "^2.3.0",
-    "greenkeeper-lockfile": "^1.14.0",
     "lodash": "^4.17.5",
     "nyc": "^11.6.0",
     "rimraf": "^2.6.2",
