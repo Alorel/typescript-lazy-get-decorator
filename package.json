@@ -53,7 +53,7 @@
   "homepage": "https://github.com/Alorel/typescript-lazy-get-decorator",
   "devDependencies": {
     "@types/lodash": "^4.14.104",
-    "@types/node": "^9.4.7",
+    "@types/node": "^10.0.3",
     "ava": "^0.25.0",
     "awesome-typescript-loader": "^5.0.0",
     "concurrently": "^3.5.0",
