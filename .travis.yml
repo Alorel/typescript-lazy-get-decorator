@@ -27,7 +27,7 @@ jobs:
           skip_cleanup: true
           email: a.molcanovas@gmail.com
           api_key:
-            secure: o2ye1uRdwUUg1sUX/RJf2h9vGLJXwDuh1in2hslKL4llxwyZJmkO+ocuBNP0wCvuX2mYjkzg24ea58ohL/2NkW3re2Wc4fWfzqwtGYjwWogbGO+1JWHIqekVO1ofqaeKagz7pxi28VxviAjAwO9dNTH0QppdJZ1z6BlQ3mtLMAg6dS7DR11TfAkjmG+KX4XCG9d3ERYBc91iOMDFonMS80fPhkLwJH7oCQiNHl+ZOucuLKOXs8lfmVv4wpCvjG9q20YLBZo7JBby/O8B6dORwUgslzLdDS3HCAqLptgJ1r/3oYA79u4WamVO+5ATwdqMwHrsjVIUjhKxiAfAA/pXRb9WQtWvcUlK0s2wiux/RfSZ93OR1Zx68QeJHNU51DOqrSwW0JxztM2Ue6TMlAkwwdltRKrNDAULQIv9kSaQinQFCFl22cuJVU+zaDFXMUf67RBhbyoGyWvTFwWkTWqhujtwgj8AjzfuPyWKBuKx0o2wPxBhK5/y8hgF7NMjDZmk5X18ojaICS5mZV0q0UW6yHlv8XuJiZ+BJmvjGtSR07G5VJtEhERZ08qnsdaASqZJDXobTGmn/CxKN1lvCbbCTojJ2OE+CsKw2MT+Rboq5vnptZfU6uZ6Rx1sWpTKAEkHUn579ocuNBdULR/w+ZNJGwhDLEf58ex6ebKCrF4J6uM=
+            secure: vrp1Z0vDZXuC09r+mFqdFKOKNtxDy04LJMgziHVAzBN0yVw++IL6le/2e6eaz3/7SP/8ElCx9uXJ6ndq2+AI3TV34dq/DsxCXJkom/wQemwxpccR5W/AnmwQFKWWdLc5uH1eoDdPGUcSFAl/putDTo3ZZ12w9d/KUMiOPEUhdguFwNoNUjk83q6k+Jt3Ta0fHZLej1cGf8Cts9cLjWu+Rbivd5Xs3QRO+91WbkyZIrBsVboe5FkgxQ8eCGpkMmeUyAQ+wiAJT+sIDUhH7tyKTQrOqLY8zVRGDrj+szk3DaJg43m0QzcyVT3Kkra5dC49z9ZWfnRjXjq5qcs3U8VsMkPnBWiKdEdOUBsajO5obBCc4EgzaMFudxqYypSYUCzcXbRHbjm6pO19qkiKNieBNMDXHelgJohg2umPGDcZSXIiddFy9ALtoIKfhoTWSI00v2DkUUNM72KhA6bhgOCuB16vwkoTYke93q9IwD/ov16Of5sPHDK4i8aPDG5JvOAPeyaD3J3+q+cDRIBzHdAKSblfpJS975ac2w43Mieo0dWLhSabN14KFuPuH3kPNXNRKiO7vWmfTfQBgXfmDkArOit16mRX7J1h6v9iCBvYxBrgBtBiicxji9INYza47n9R0PiJlIkxBNkFYNbx1HM8oFrs1csGnCK6wXi/XSD6hK4=
           on:
             tags: true
             repo: Alorel/typescript-lazy-get-decorator

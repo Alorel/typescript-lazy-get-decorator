@@ -46,10 +46,6 @@
       0,
       1
     ],
-    "no-namespace": [
-      true,
-      "allow-declarations"
-    ],
     "no-non-null-assertion": true,
     "no-reference": true,
     "no-unnecessary-type-assertion": true,
@@ -107,7 +103,6 @@
       "allow-fast-null-checks",
       "allow-new"
     ],
-    "no-unused-variable": true,
     "no-var-keyword": true,
     "no-void-expression": [
       true,
@@ -121,7 +116,6 @@
     "restrict-plus-operands": true,
     "switch-default": true,
     "triple-equals": true,
-    "typeof-compare": true,
     "use-isnan": true,
     "cyclomatic-complexity": [
       true,
