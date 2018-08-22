@@ -18,8 +18,7 @@ before_install:
 install: yarn install --check-files
 
 script:
-- yarn run tslint
-- yarn run typecheck
+- yarn run lint
 - yarn test
 
 after_success: cat ./coverage/lcov.info | coveralls
