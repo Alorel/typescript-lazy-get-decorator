@@ -12,3 +12,6 @@
 /webpack.config.js
 /yarn.lock
 /.releaserc.yml
+/git_gpg_keys.asc
+/prepare-gpg-key.sh
+/git_gpg_keys.asc.enc

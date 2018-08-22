@@ -8,3 +8,4 @@
 /coverage/
 /.nyc_output/
 /dist/
+/git_gpg_keys.asc

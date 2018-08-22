@@ -1,35 +1,43 @@
-base: &base
-  language: node_js
-  node_js: stable
-  sudo: false
-  cache:
-    directories:
-      - node_modules
-  before_cache: rm -rf ./node_modules/.cache
-  after_success: cat ./coverage/lcov.info | coveralls
-  before_deploy: npm run build
-  script:
-    - npm run lint
-    - npm test
+language: node_js
+node_js:
+- stable
+- lts/carbon
+- lts/boron
+
+cache:
+  yarn: true
+  directories:
+  - node_modules
+before_cache: rm -rf ./node_modules/.cache
+
+before_install:
+- npm i -g greenkeeper-lockfile yarn
+- &prepKey if [[ $GH_TOKEN ]]; then ./prepare-gpg-key.sh; fi;
+- greenkeeper-lockfile-update
+
+install: yarn install --check-files
+
+script:
+- yarn run tslint
+- yarn run typecheck
+- yarn test
+
+after_success: cat ./coverage/lcov.info | coveralls
+after_script: if [[ $GH_TOKEN ]]; then greenkeeper-lockfile-upload; fi;
+
+stages:
+  - Test
+  - name: Release
+    if: branch = master AND type = push AND (NOT tag IS present)
 
 jobs:
   include:
-    - <<: *base
-      if: type IN (push, cron)
-      before_install:
-        - npm install -g greenkeeper-lockfile
-        - greenkeeper-lockfile-update
-      env:
-        - secure: lrcamRswKcT06gpk6+oQshkkN2MmCAnACu3/yUoxHGeUX2lz8GkwKFFkrr5yhp33yjP0wkblI6WCq0kp+Avx/xNEP+yOr1KPi8RsUU+92deF2+0IImLol+IbTuUU8LzR+UUWrrLJ0A4HxtYhYw37CYkOjoom53YHySVe1RTUxHO4f/9NRBYj7TZcwPBTR2vdF+4twHbEZFW3Gwm4zK0JNDj5QECTIZvN564I3FD+9zHH4+4/05T0WeJXDJjhkz6fvb9wzT15YBr67cYNLsCRvOjC6soMYqWPq3QWpMU5Y3FIXr2xJHbusxIbHWwAVKvSTnkpKfSVonDL8hY/QMNYfVSoFhx1kt79CWHaJDkNCl/U6jBiebZPvBT2JoeblNPGn0AydsqCNhZJ6XCIL1+J0I8HaTvjWlByaitiiuWY7GbevnplZ76g4daQ+xd9c89i51LIQqP0qb6RI1c+P+wlf25SDNEi/ExdhNxnG5nAqM7G3a77n90zAhgypKLmsVGXXYBGOHVKLxcO+rXObGwEVdb2CACeJVl3mI4tFV6R4SUzW+U6kr0yKPFTFva9fPjcdsAPrKNu1hL005ldYvZDzFoQqFpFUoqeR17AANUXDmVWCih5eZ6o8JmessuTg+KM0VrKzLy/6Pr72F1VHY9Y1ExRag55t8JOZ6BzTV8qav8=
-      after_script: greenkeeper-lockfile-upload
-      deploy:
-          provider: npm
-          skip_cleanup: true
-          email: a.molcanovas@gmail.com
-          api_key:
-            secure: vrp1Z0vDZXuC09r+mFqdFKOKNtxDy04LJMgziHVAzBN0yVw++IL6le/2e6eaz3/7SP/8ElCx9uXJ6ndq2+AI3TV34dq/DsxCXJkom/wQemwxpccR5W/AnmwQFKWWdLc5uH1eoDdPGUcSFAl/putDTo3ZZ12w9d/KUMiOPEUhdguFwNoNUjk83q6k+Jt3Ta0fHZLej1cGf8Cts9cLjWu+Rbivd5Xs3QRO+91WbkyZIrBsVboe5FkgxQ8eCGpkMmeUyAQ+wiAJT+sIDUhH7tyKTQrOqLY8zVRGDrj+szk3DaJg43m0QzcyVT3Kkra5dC49z9ZWfnRjXjq5qcs3U8VsMkPnBWiKdEdOUBsajO5obBCc4EgzaMFudxqYypSYUCzcXbRHbjm6pO19qkiKNieBNMDXHelgJohg2umPGDcZSXIiddFy9ALtoIKfhoTWSI00v2DkUUNM72KhA6bhgOCuB16vwkoTYke93q9IwD/ov16Of5sPHDK4i8aPDG5JvOAPeyaD3J3+q+cDRIBzHdAKSblfpJS975ac2w43Mieo0dWLhSabN14KFuPuH3kPNXNRKiO7vWmfTfQBgXfmDkArOit16mRX7J1h6v9iCBvYxBrgBtBiicxji9INYza47n9R0PiJlIkxBNkFYNbx1HM8oFrs1csGnCK6wXi/XSD6hK4=
-          on:
-            tags: true
-            repo: Alorel/typescript-lazy-get-decorator
-    - <<: *base
-      if: NOT type IN (push, cron)
+  - stage: Release
+    node_js: stable
+    before_install:
+      - npm i -g yarn
+      - *prepKey
+    before_script: yarn run build
+    script: semantic-release
+    after_success: []
+    after_script: []
