@@ -15,7 +15,7 @@ before_install:
 - &prepKey if [[ $GH_TOKEN ]]; then ./prepare-gpg-key.sh; fi;
 - greenkeeper-lockfile-update
 
-install: yarn install --check-files
+install: yarn install --check-files --ignore-engines
 
 script:
 - yarn run lint
