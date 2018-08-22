@@ -65,7 +65,6 @@
     "@types/lodash": "^4.14.104",
     "@types/node": "^10.0.3",
     "ava": "^0.25.0",
-    "awesome-typescript-loader": "^5.0.0",
     "concurrently": "^3.5.0",
     "coveralls": "^3.0.0",
     "cross-spawn": "^6.0.5",
@@ -76,6 +75,7 @@
     "semantic-release": "^15.9.9",
     "tslib": "^1.9.0",
     "tslint": "^5.9.1",
+    "ts-loader": "^4.5.0",
     "typescript": "^3.0.1",
     "webpack": "^4.1.1",
     "webpack-cli": "^3.0.0"

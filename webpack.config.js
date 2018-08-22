@@ -16,11 +16,9 @@ const base = {
       {
         test: /\.ts$/,
         use: [{
-          loader: 'awesome-typescript-loader',
+          loader: 'ts-loader',
           options: {
-            configFileName: './tsconfig.esm5.json',
-            useCache: true,
-            cacheDirectory: join(__dirname, 'node_modules', '.cache', '.awcache')
+            configFile: join(__dirname, 'tsconfig.esm5.json')
           }
         }]
       }
