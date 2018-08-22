@@ -10,3 +10,5 @@
 /.travis.yml
 /.nycrc
 /webpack.config.js
+/yarn.lock
+/.releaserc.yml
