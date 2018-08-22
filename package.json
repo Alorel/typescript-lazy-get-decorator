@@ -5,7 +5,11 @@
   "main": "dist/es5/LazyGetter.js",
   "browser": "dist/umd/LazyGetter.js",
   "es2015": "dist/esm2015/LazyGetter.js",
+  "esm2015": "dist/esm2015/LazyGetter.js",
+  "fesm2015": "dist/esm2015/LazyGetter.js",
   "module": "dist/esm5/LazyGetter.js",
+  "esm5": "dist/esm5/LazyGetter.js",
+  "fesm5": "dist/esm5/LazyGetter.js",
   "typings": "dist/es5/LazyGetter.d.ts",
   "scripts": {
     "clean:test": "rimraf ./test/*.js ./test/*.js.map ./.nyc_output ./src/*.js ./src/*.js.map",
