@@ -16,7 +16,7 @@ export function LazyGetter(setProto = false, makeNonConfigurable = false): Metho
     } else if (!descriptor.configurable) {
       throw new Error('@LazyGetter target must be configurable');
     } else {
-      descriptor.get = function() {
+      descriptor.get = function () {
         const value = originalMethod.apply(this, arguments);
 
         const newDescriptor: PropertyDescriptor = {
