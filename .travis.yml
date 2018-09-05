@@ -6,9 +6,6 @@ node_js:
 
 cache:
   yarn: true
-  directories:
-  - node_modules
-before_cache: rm -rf ./node_modules/.cache
 
 before_install:
 - npm i -g greenkeeper-lockfile yarn

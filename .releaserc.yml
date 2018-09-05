@@ -1,9 +1,13 @@
 branch: master
 tagFormat: '${version}'
 
+pkgRoot: './dist'
+
 prepare:
 - '@semantic-release/changelog'
 - '@alorel-personal/semantic-release'
+- path: '@semantic-release/exec'
+  cmd: ./node_modules/.bin/alo copy-files
 - '@semantic-release/npm'
 - path: '@semantic-release/git'
   message: 'chore(release): ${nextRelease.version}'
