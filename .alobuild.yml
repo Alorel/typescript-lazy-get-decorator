@@ -8,4 +8,4 @@ copy-files:
   to: dist
 
 global:
-  dist-dirs: dist
+  dist-dirs: './dist'
