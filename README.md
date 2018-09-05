@@ -1,7 +1,7 @@
 # Typescript Lazy Getter
 
-[![Build Status](https://travis-ci.org/Alorel/typescript-lazy-get-decorator.png?branch=1.2.1)](https://travis-ci.org/Alorel/typescript-lazy-get-decorator)
-[![Coverage Status](https://coveralls.io/repos/github/Alorel/typescript-lazy-get-decorator/badge.svg?branch=1.2.1)](https://coveralls.io/github/Alorel/typescript-lazy-get-decorator?branch=1.2.1)
+[![Build Status](https://travis-ci.org/Alorel/typescript-lazy-get-decorator.png?branch=1.2.2)](https://travis-ci.org/Alorel/typescript-lazy-get-decorator)
+[![Coverage Status](https://coveralls.io/repos/github/Alorel/typescript-lazy-get-decorator/badge.svg?branch=1.2.2)](https://coveralls.io/github/Alorel/typescript-lazy-get-decorator?branch=1.2.2)
 [![Dependency status](https://david-dm.org/alorel/typescript-lazy-get-decorator.svg)](https://david-dm.org/alorel/typescript-lazy-get-decorator#info=dependencies&view=list)
 [![Dev dependency status](https://david-dm.org/alorel/typescript-lazy-get-decorator/dev-status.svg)](https://david-dm.org/alorel/typescript-lazy-get-decorator#info=devDependencies&view=list)
 [![Greenkeeper badge](https://badges.greenkeeper.io/Alorel/typescript-lazy-get-decorator.svg)](https://greenkeeper.io/)

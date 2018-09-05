@@ -1,3 +1,11 @@
+## [1.2.2](https://github.com/Alorel/typescript-lazy-get-decorator/compare/1.2.1...1.2.2) (2018-09-05)
+
+
+### Maintenance
+
+* run tslint --fix for updated rules ([6078d97](https://github.com/Alorel/typescript-lazy-get-decorator/commit/6078d97))
+* **package:** Clean up package.json & dist dir ([6ec6d5c](https://github.com/Alorel/typescript-lazy-get-decorator/commit/6ec6d5c))
+
 ## [1.2.1](https://github.com/Alorel/typescript-lazy-get-decorator/compare/1.2.0...1.2.1) (2018-08-22)
 
 
