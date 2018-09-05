@@ -33,7 +33,11 @@ jobs:
     before_install:
       - npm i -g yarn
       - *prepKey
-    before_script: yarn run build
+    before_script:
+      - yarn run build
+      - alo copy-diles
+      - alo clean-pkg-json
+      - alo clean-dist
     script: semantic-release
     after_success: []
     after_script: []

@@ -19,7 +19,6 @@
     "posttest": "npm run clean:test",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "prebuild": "rimraf ./dist",
-    "postbuild": "concurrently \"alo copy-files && alo clean-pkg-json\" \"alo clean-dist\"",
     "build": "concurrently \"npm run build:esm5\" \"npm run build:esm2015\" \"npm run build:es5\" \"npm run build:umd\"",
     "build:umd": "webpack",
     "build:esm5": "tsc -p tsconfig.esm5.json",
