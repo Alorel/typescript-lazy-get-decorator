@@ -2,15 +2,16 @@
 # yarn lockfile v1
 
 
-"@alorel-personal/build-tools@~3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@alorel-personal/build-tools/-/build-tools-3.1.0.tgz#48352dafa1f4c50104541e01703c6c85c84e756f"
+"@alorel-personal/build-tools@~3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@alorel-personal/build-tools/-/build-tools-3.2.1.tgz#4ed7cbf32db7ac53329ba5a66cb6e7404b905b79"
   dependencies:
     delete-empty "^2.0.0"
     fs-extra "^7.0.0"
     glob "^7.1.0"
     json5 "^2.0.0"
     lodash "^4.17.0"
+    readline-sync "^1.4.9"
     yamljs "^0.3.0"
     yargs "^12.0.0"
 
@@ -5387,6 +5388,10 @@ readdirp@^2.0.0:
     minimatch "^3.0.2"
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
+
+readline-sync@^1.4.9:
+  version "1.4.9"
+  resolved "https://registry.yarnpkg.com/readline-sync/-/readline-sync-1.4.9.tgz#3eda8e65f23cd2a17e61301b1f0003396af5ecda"
 
 redent@^1.0.0:
   version "1.0.0"
