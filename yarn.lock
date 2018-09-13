@@ -2,16 +2,22 @@
 # yarn lockfile v1
 
 
-"@alorel-personal/build-tools@~3.2.1":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@alorel-personal/build-tools/-/build-tools-3.2.1.tgz#4ed7cbf32db7ac53329ba5a66cb6e7404b905b79"
+"@alorel-personal/build-tools@~3.3.1":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@alorel-personal/build-tools/-/build-tools-3.3.1.tgz#06d3aad2281c06675e55c98caa91270959c5f5ee"
   dependencies:
+    cross-spawn "~6.0.5"
+    custom-tslint-formatters "2.4.0"
     delete-empty "^2.0.0"
     fs-extra "^7.0.0"
     glob "^7.1.0"
     json5 "^2.0.0"
     lodash "^4.17.0"
     readline-sync "^1.4.9"
+    reflect-metadata "^0.1.12"
+    tslib "^1.9.3"
+    tslint "5.11.0"
+    typescript-lazy-get-decorator "^1.2.1"
     yamljs "^0.3.0"
     yargs "^12.0.0"
 
@@ -1965,7 +1971,7 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
-custom-tslint-formatters@~2.4.0:
+custom-tslint-formatters@2.4.0, custom-tslint-formatters@~2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/custom-tslint-formatters/-/custom-tslint-formatters-2.4.0.tgz#4e2c17497e04affb48757006907e0d0d10dbdd88"
   dependencies:
@@ -5413,6 +5419,10 @@ redeyed@~2.1.0:
   dependencies:
     esprima "~4.0.0"
 
+reflect-metadata@^0.1.12:
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.12.tgz#311bf0c6b63cd782f228a81abe146a2bfa9c56f2"
+
 regenerate@^1.2.1:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.0.tgz#4a856ec4b56e4077c557589cae85e7a4c8869a11"
@@ -6321,11 +6331,11 @@ ts-loader@~5.0.0:
     micromatch "^3.1.4"
     semver "^5.0.1"
 
-tslib@^1.6.0, tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0, tslib@~1.9.0:
+tslib@^1.6.0, tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3, tslib@~1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
 
-tslint@~5.11.0:
+tslint@5.11.0, tslint@~5.11.0:
   version "5.11.0"
   resolved "https://registry.yarnpkg.com/tslint/-/tslint-5.11.0.tgz#98f30c02eae3cde7006201e4c33cb08b48581eed"
   dependencies:
@@ -6365,6 +6375,10 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
+
+typescript-lazy-get-decorator@^1.2.1:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/typescript-lazy-get-decorator/-/typescript-lazy-get-decorator-1.2.2.tgz#f7ffe9f9225b830f851f2701376409cfd640100e"
 
 typescript@~3.0.1:
   version "3.0.3"
