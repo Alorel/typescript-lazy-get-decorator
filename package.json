@@ -57,7 +57,7 @@
   },
   "homepage": "https://github.com/Alorel/typescript-lazy-get-decorator",
   "devDependencies": {
-    "@alorel-personal/build-tools": "~3.2.1",
+    "@alorel-personal/build-tools": "3.3.1",
     "@alorel-personal/conventional-changelog-alorel": "2.0.4",
     "@alorel-personal/semantic-release": "1.3.1",
     "@alorel-personal/tslint-rules": "2.0.0",
@@ -76,7 +76,7 @@
     "nyc": "~13.0.1",
     "rimraf": "~2.6.2",
     "semantic-release": "~15.9.9",
-    "ts-loader": "~5.0.0",
+    "ts-loader": "~5.1.0",
     "tslib": "~1.9.0",
     "tslint": "~5.11.0",
     "typescript": "~3.0.1",
