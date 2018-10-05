@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@alorel-personal/build-tools@4.0.2":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@alorel-personal/build-tools/-/build-tools-4.0.2.tgz#79dc0b35baa892a6aeb888ee5d2e3f405f8cbad6"
+"@alorel-personal/build-tools@4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@alorel-personal/build-tools/-/build-tools-4.1.1.tgz#6fd81d0caba755a6410fc2b73c6105c04a56ae14"
   dependencies:
     chalk "^2.4.0"
     cross-spawn "^6.0.0"
