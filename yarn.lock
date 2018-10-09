@@ -45,9 +45,13 @@
     fs-extra "^7.0.0"
     tslib "^1.6.0"
 
-"@alorel-personal/tslint-rules@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@alorel-personal/tslint-rules/-/tslint-rules-3.0.0.tgz#c3497377477af6ff920d5d6b3bcb60489b712cfa"
+"@alorel-personal/tslint-rules@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@alorel-personal/tslint-rules/-/tslint-rules-4.0.0.tgz#cdbe1128a87524add84217ecae3e1337bf8b93e3"
+  dependencies:
+    tslint "^5.11.0"
+    tslint-sonarts "1.8.0"
+    typescript ">=2.2.0 <4.0.0"
 
 "@ava/babel-plugin-throws-helper@^2.0.0":
   version "2.0.0"
@@ -3082,6 +3086,10 @@ ignore-walk@^3.0.1:
 ignore@^3.3.5:
   version "3.3.10"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.10.tgz#0a97fb876986e8081c631160f8f9f389157f0043"
+
+immutable@^3.8.2:
+  version "3.8.2"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
 
 import-from@^2.1.0:
   version "2.1.0"
@@ -6427,7 +6435,13 @@ tslib@^1.6.0, tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0, tslib@~1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
 
-tslint@5.11.0, tslint@~5.11.0:
+tslint-sonarts@1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/tslint-sonarts/-/tslint-sonarts-1.8.0.tgz#80f2e8addd418c3b8807fc0155dec33b5a81e8d1"
+  dependencies:
+    immutable "^3.8.2"
+
+tslint@5.11.0, tslint@^5.11.0, tslint@~5.11.0:
   version "5.11.0"
   resolved "https://registry.yarnpkg.com/tslint/-/tslint-5.11.0.tgz#98f30c02eae3cde7006201e4c33cb08b48581eed"
   dependencies:
@@ -6471,6 +6485,10 @@ typedarray@^0.0.6:
 typescript-lazy-get-decorator@^1.2.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/typescript-lazy-get-decorator/-/typescript-lazy-get-decorator-1.2.2.tgz#f7ffe9f9225b830f851f2701376409cfd640100e"
+
+"typescript@>=2.2.0 <4.0.0":
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.1.2.tgz#c03a5d16f30bb60ad8bb6fe8e7cb212eedeec950"
 
 typescript@~3.0.1:
   version "3.0.3"
