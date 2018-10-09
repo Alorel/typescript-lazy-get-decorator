@@ -1,4 +1,4 @@
-// tslint:disable:no-magic-numbers
+// tslint:disable:no-magic-numbers no-identical-functions no-duplicate-string
 import test from 'ava';
 import {LazyGetter} from '../src/LazyGetter';
 
