@@ -16,7 +16,6 @@
       "importHelpers": true,
       "allowUnreachableCode": false,
       "allowUnusedLabels": false,
-      "noImplicitUseStrict": true,
       "stripInternal": true,
       "lib": [
          "es2017",
