@@ -2,7 +2,6 @@ language: node_js
 node_js:
 - stable
 - lts/carbon
-- lts/boron
 
 cache:
   yarn: true
@@ -22,22 +21,22 @@ after_success: cat ./coverage/lcov.info | coveralls
 after_script: if [[ $GH_TOKEN ]]; then greenkeeper-lockfile-upload; fi;
 
 stages:
-  - Test
-  - name: Release
-    if: branch = master AND type = push AND (NOT tag IS present)
+- Test
+- name: Release
+  if: branch = master AND type = push AND (NOT tag IS present)
 
 jobs:
   include:
   - stage: Release
     node_js: stable
     before_install:
-      - npm i -g yarn
-      - *prepKey
+    - npm i -g yarn
+    - *prepKey
     before_script:
-      - yarn run build
-      - alo copy-files
-      - alo clean-pkg-json
-      - alo clean-dist
+    - yarn run build
+    - alo copy-files
+    - alo clean-pkg-json
+    - alo clean-dist
     script: semantic-release
     after_success: []
     after_script: []
