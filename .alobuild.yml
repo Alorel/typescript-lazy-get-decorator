@@ -1,11 +1,24 @@
+global:
+  dist-dirs: &dd './dist'
+  tsconfig: tsconfig.lib.json
+
 copy-files:
   from:
   - package.json
-  - index.d.ts
   - LICENSE
   - CHANGELOG.md
   - README.md
-  to: dist
+  to: *dd
 
-global:
-  dist-dirs: './dist'
+build:
+  targets:
+  - cjs
+  - declaration
+  - fesm5
+  - fesm2015
+  - umd
+  entry: src/LazyGetter.ts
+  license-banner: true
+  out: *dd
+  umd-name: LazyGet
+  externals: tslib

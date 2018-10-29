@@ -4,11 +4,8 @@
  * @param {boolean} [makeNonConfigurable=false] Set to true to make the resolved property non-configurable
  * @return {(target: any, key: string, descriptor: PropertyDescriptor) => void} A Typescript decorator function
  */
-export function LazyGetter(setProto = false, makeNonConfigurable = false): MethodDecorator {
+export function LazyGetter(setProto?: boolean, makeNonConfigurable?: boolean): MethodDecorator {
   return (target: any, key: PropertyKey, descriptor: PropertyDescriptor): void => {
-    if (!descriptor) {
-      descriptor = Object.getOwnPropertyDescriptor(target, key);
-    }
     const originalMethod = descriptor.get;
 
     if (!originalMethod) {

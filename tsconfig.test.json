@@ -1,13 +1,13 @@
 {
-   "extends": "./tsconfig.base",
-   "compilerOptions": {
-      "module": "commonjs",
-      "target": "es2015",
-      "allowJs": true,
-      "noUnusedLocals": false,
-      "rootDir": "./test"
-   },
-   "include": [
-      "./test/**/*.ts"
-   ]
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2015",
+    "allowJs": true,
+    "noUnusedLocals": false,
+    "rootDir": "./test"
+  },
+  "include": [
+    "./test/**/*.ts"
+  ]
 }
