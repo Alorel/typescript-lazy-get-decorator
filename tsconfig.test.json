@@ -1,13 +1,17 @@
 {
-  "extends": "./tsconfig.base.json",
+  "extends": "./tsconfig.base",
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2015",
+    "lib": [
+      "esnext"
+    ],
+    "declaration": false,
+    "importHelpers": true,
+    "inlineSourceMap": true,
+    "checkJs": false,
     "allowJs": true,
-    "noUnusedLocals": false,
-    "rootDir": "./test"
+    "outFile": "test/LazyGetter.typescript.js"
   },
-  "include": [
-    "./test/**/*.ts"
+  "files": [
+    "test/LazyGetter.js"
   ]
 }

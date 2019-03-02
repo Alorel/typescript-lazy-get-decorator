@@ -2,6 +2,7 @@
 /src/*.js.map
 /git_gpg_keys.asc
 /yarn-error.log
+/test/LazyGetter.*.js
 .idea/
 node_modules/
 dist/

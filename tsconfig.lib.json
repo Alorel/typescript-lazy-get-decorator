@@ -1,6 +1,8 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    "module": "es2015",
+    "sourceMap": true,
     "rootDir": "./src"
   },
   "files": [
