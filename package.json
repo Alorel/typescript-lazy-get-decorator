@@ -29,8 +29,10 @@
   },
   "keywords": [
     "typescript",
+    "babel",
     "lazy get",
     "lazy getter",
+    "lazy",
     "get",
     "getter",
     "cache",
