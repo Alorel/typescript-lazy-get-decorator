@@ -1,3 +1,24 @@
+# [2.0.0](https://github.com/Alorel/typescript-lazy-get-decorator/compare/1.2.2...2.0.0) (2019-03-02)
+
+
+### Features
+
+* Babel support (legacy and current proposal) ([97bc836](https://github.com/Alorel/typescript-lazy-get-decorator/commit/97bc836)), closes [#63](https://github.com/Alorel/typescript-lazy-get-decorator/issues/63)
+
+
+### Maintenance
+
+* Add GitHub issue templates ([2bd86c0](https://github.com/Alorel/typescript-lazy-get-decorator/commit/2bd86c0))
+* Add test exceptions for new tslint rules ([dcd671e](https://github.com/Alorel/typescript-lazy-get-decorator/commit/dcd671e))
+* Clean up deps ([445059a](https://github.com/Alorel/typescript-lazy-get-decorator/commit/445059a))
+* remove webpack.config.js ([cc42d08](https://github.com/Alorel/typescript-lazy-get-decorator/commit/cc42d08))
+* **package:** update dependencies ([49b5b9e](https://github.com/Alorel/typescript-lazy-get-decorator/commit/49b5b9e))
+
+
+### BREAKING CHANGES
+
+* Package renamed to lazy-get-decorator
+
 ## [1.2.2](https://github.com/Alorel/typescript-lazy-get-decorator/compare/1.2.1...1.2.2) (2018-09-05)
 
 
