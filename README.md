@@ -1,12 +1,19 @@
-# Typescript Lazy Getter
+# Lazy Get decorator
 
 [![Build Status](https://travis-ci.org/Alorel/typescript-lazy-get-decorator.png?branch=1.2.2)](https://travis-ci.org/Alorel/typescript-lazy-get-decorator)
 [![Coverage Status](https://coveralls.io/repos/github/Alorel/typescript-lazy-get-decorator/badge.svg?branch=1.2.2)](https://coveralls.io/github/Alorel/typescript-lazy-get-decorator?branch=1.2.2)
-[![Dependency status](https://david-dm.org/alorel/typescript-lazy-get-decorator.svg)](https://david-dm.org/alorel/typescript-lazy-get-decorator#info=dependencies&view=list)
-[![Dev dependency status](https://david-dm.org/alorel/typescript-lazy-get-decorator/dev-status.svg)](https://david-dm.org/alorel/typescript-lazy-get-decorator#info=devDependencies&view=list)
 [![Greenkeeper badge](https://badges.greenkeeper.io/Alorel/typescript-lazy-get-decorator.svg)](https://greenkeeper.io/)
 
-[![NPM](https://nodei.co/npm/typescript-lazy-get-decorator.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/typescript-lazy-get-decorator)
+[![NPM](https://nodei.co/npm/lazy-get-decorator.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/lazy-get-decorator)
+
+Previously known as [typescript-lazy-get-decorator](https://www.npmjs.com/package/lazy-get-decorator).
+
+# Compatibility
+
+- Typescript - full
+- Spec-compliant decorator proposal - full
+- Babel (current proposal) - full
+- Babel (legacy) - full
 
 # API
 
@@ -23,19 +30,21 @@ function LazyGetter(setProto: boolean = false, makeNonConfigurable = false) {}
 # Usage
 
 ```typescript
-import {LazyGetter} from 'typescript-lazy-get-decorator';
+import {LazyGetter} from 'lazy-get-decorator';
 
 class AClass {
 
     @LazyGetter()
-    get lazyNoProto():string {
+    get lazyNoProto(): string {
         console.log('Evaluating lazyNoProto');
+
         return 'lazyNoProtoValue';
     }
 
     @LazyGetter(true)
-    get lazyWithProto():string {
+    get lazyWithProto(): string {
         console.log('Evaluating lazyWithProto');
+
         return 'lazyWithProtoValue';
     }
 }
@@ -59,7 +68,7 @@ console.log(inst2.lazyWithProto);
 console.log(inst2.lazyWithProto);
 ```
 
-Outputs:
+Output:
 
     ==== inst 1 ====
 
