@@ -1,7 +1,5 @@
-type Options = Pick<PropertyDescriptor, 'configurable' | 'enumerable' | 'writable'>;
-
-interface NewDescriptor extends Options {
-  descriptor?: Options;
+interface NewDescriptor extends PropertyDescriptor {
+  descriptor?: PropertyDescriptor;
 
   readonly key: PropertyKey;
 
@@ -89,7 +87,7 @@ function decorateNew(inp: NewDescriptor, setProto?: boolean, makeNonConfigurable
   if (out.descriptor) {
     out.descriptor = Object.assign({}, out.descriptor);
   }
-  const actualDesc = <PropertyDescriptor>(out.descriptor || out); //tslint:disable-line:incorrect babel spec support
+  const actualDesc: PropertyDescriptor = <any>(out.descriptor || out); //incorrect babel implementation support
 
   const originalMethod = validateAndExtractMethodFromDescriptor(actualDesc);
   const isStatic = inp.placement === 'static';
