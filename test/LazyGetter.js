@@ -88,7 +88,7 @@ describe(`LazyGetter (${TEST_TYPE})`, () => {
         expect(MyTestClass.staticGets).to.eq(1, 'Gets still 1');
       });
 
-      it('true', t => {
+      it('true', () => {
         expect(MyTestClass.staticGets).to.eq(0, 'Initial gets = 1');
 
         noop(MyTestClass.staticGetterTrue);
@@ -100,7 +100,7 @@ describe(`LazyGetter (${TEST_TYPE})`, () => {
     });
 
     describe('Instance', () => {
-      it('Instance getter: false', t => {
+      it('Instance getter: false', () => {
         expect(MyTestClass.instanceGets).to.eq(0, 'Initial gets = 0');
 
         const inst1 = new MyTestClass();
@@ -120,7 +120,7 @@ describe(`LazyGetter (${TEST_TYPE})`, () => {
         expect(MyTestClass.instanceGets).to.eq(2, 'Gets still 1');
       });
 
-      it('Instance getter: default', t => {
+      it('Instance getter: default', () => {
         expect(MyTestClass.instanceGets).to.eq(0, 'Initial gets = 0');
 
         const inst1 = new MyTestClass();
@@ -140,7 +140,7 @@ describe(`LazyGetter (${TEST_TYPE})`, () => {
         expect(MyTestClass.instanceGets).to.eq(2, 'Gets still 2');
       });
 
-      it('Instance getter: true', t => {
+      it('Instance getter: true', () => {
         expect(MyTestClass.instanceGets).to.eq(0, 'Initial gets = 0');
 
         const inst1 = new MyTestClass();
@@ -161,14 +161,14 @@ describe(`LazyGetter (${TEST_TYPE})`, () => {
       });
     });
 
-    it('Configurable getter', t => {
+    it('Configurable getter', () => {
       const i = new MyTestClass();
       noop(i.lazyGetterConfig);
 
       expect(Object.getOwnPropertyDescriptor(i, 'lazyGetterConfig').configurable).to.eq(true);
     });
 
-    it('Non-configurable getter', t => {
+    it('Non-configurable getter', () => {
       const i = new MyTestClass();
       noop(i.lazyGetterNoConfig);
 

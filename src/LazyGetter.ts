@@ -1,6 +1,6 @@
 type Options = Pick<PropertyDescriptor, 'configurable' | 'enumerable' | 'writable'>;
 
-interface NewDescriptor<T = any> extends Options {
+interface NewDescriptor extends Options {
   descriptor?: Options;
 
   readonly key: PropertyKey;
@@ -8,8 +8,46 @@ interface NewDescriptor<T = any> extends Options {
   readonly kind: string;
 
   placement: string;
+}
 
-  initializer(): T;
+function validateAndExtractMethodFromDescriptor(desc: PropertyDescriptor): Function {
+  const originalMethod = <Function>desc.get;
+
+  if (!originalMethod) {
+    throw new Error('@LazyGetter can only decorate getters!');
+  } else if (!desc.configurable) {
+    throw new Error('@LazyGetter target must be configurable');
+  }
+
+  return originalMethod;
+}
+
+function getterCommon(target: any, //tslint:disable-line:parameters-max-number
+                      key: PropertyKey,
+                      isStatic: boolean,
+                      enumerable: boolean,
+                      originalMethod: Function,
+                      thisArg: any,
+                      args: IArguments,
+                      setProto?: boolean,
+                      makeNonConfigurable?: boolean): any {
+  const value = originalMethod.apply(thisArg, <any>args);
+
+  const newDescriptor: PropertyDescriptor = {
+    configurable: !makeNonConfigurable,
+    enumerable,
+    value
+  };
+
+  if (isStatic || setProto) {
+    Object.defineProperty(target, key, newDescriptor);
+  }
+
+  if (!isStatic) {
+    Object.defineProperty(thisArg, key, newDescriptor);
+  }
+
+  return value;
 }
 
 function decorateLegacy(target: any,
@@ -18,7 +56,7 @@ function decorateLegacy(target: any,
                         setProto?: boolean,
                         makeNonConfigurable?: boolean): PropertyDescriptor {
   if (!descriptor) {
-    descriptor = <PropertyDescriptor>Object.getOwnPropertyDescriptor(target, key);
+    descriptor = <any>Object.getOwnPropertyDescriptor(target, key);
     if (!descriptor) {
       const e = new Error('@LazyGetter is unable to determine the property descriptor');
       (<any>e).$target = target;
@@ -27,37 +65,53 @@ function decorateLegacy(target: any,
     }
   }
 
-  const originalMethod = <Function>descriptor.get;
+  const originalMethod = validateAndExtractMethodFromDescriptor(descriptor);
 
-  if (!originalMethod) {
-    throw new Error('@LazyGetter can only decorate getters!');
-  } else if (!descriptor.configurable) {
-    throw new Error('@LazyGetter target must be configurable');
+  return Object.assign({}, descriptor, {
+    get: function (this: any): any {
+      return getterCommon(
+        target,
+        key,
+        Object.getPrototypeOf(target) === Function.prototype,
+        !!descriptor.enumerable,
+        originalMethod,
+        this,
+        arguments,
+        setProto,
+        makeNonConfigurable
+      );
+    }
+  });
+}
+
+function decorateNew(inp: NewDescriptor, setProto?: boolean, makeNonConfigurable?: boolean): NewDescriptor {
+  const out: NewDescriptor = Object.assign({}, inp);
+  if (out.descriptor) {
+    out.descriptor = Object.assign({}, out.descriptor);
+  }
+  const actualDesc = <PropertyDescriptor>(out.descriptor || out); //tslint:disable-line:incorrect babel spec support
+
+  const originalMethod = validateAndExtractMethodFromDescriptor(actualDesc);
+  const isStatic = inp.placement === 'static';
+  if (out.placement === 'own') {
+    out.placement = 'prototype';
   }
 
-  function get(this: any): any {
-    const value = originalMethod.apply(this, <any>arguments);
+  actualDesc.get = function (this: any): any {
+    return getterCommon(
+      isStatic ? this : Object.getPrototypeOf(this),
+      out.key,
+      isStatic,
+      !!actualDesc.enumerable,
+      originalMethod,
+      this,
+      arguments,
+      setProto,
+      makeNonConfigurable
+    );
+  };
 
-    const newDescriptor: PropertyDescriptor = {
-      configurable: !makeNonConfigurable,
-      enumerable: descriptor.enumerable,
-      value
-    };
-
-    const isStatic = Object.getPrototypeOf(target) === Function.prototype;
-
-    if (isStatic || setProto) {
-      Object.defineProperty(target, key, newDescriptor);
-    }
-
-    if (!isStatic) {
-      Object.defineProperty(this, key, newDescriptor);
-    }
-
-    return value;
-  }
-
-  return Object.assign({}, descriptor, {get});
+  return out;
 }
 
 /**
@@ -67,7 +121,9 @@ function decorateLegacy(target: any,
  * @return A Typescript decorator function
  */
 export function LazyGetter(setProto?: boolean, makeNonConfigurable?: boolean): MethodDecorator {
-  return (target: any, key: PropertyKey, descriptor: PropertyDescriptor): PropertyDescriptor | NewDescriptor => {
-    return decorateLegacy(target, key, descriptor, setProto, makeNonConfigurable);
+  return (targetOrDesc: any, key: PropertyKey, descriptor: PropertyDescriptor): PropertyDescriptor | NewDescriptor => {
+    return key === undefined ?
+      decorateNew(targetOrDesc, setProto, makeNonConfigurable) :
+      decorateLegacy(targetOrDesc, key, descriptor, setProto, makeNonConfigurable);
   };
 }
