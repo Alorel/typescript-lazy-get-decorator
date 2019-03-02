@@ -53,6 +53,7 @@ function decorateLegacy(target: any,
                         descriptor: PropertyDescriptor,
                         setProto?: boolean,
                         makeNonConfigurable?: boolean): PropertyDescriptor {
+  /* istanbul ignore if */
   if (!descriptor) {
     descriptor = <any>Object.getOwnPropertyDescriptor(target, key);
     if (!descriptor) {
@@ -91,9 +92,6 @@ function decorateNew(inp: NewDescriptor, setProto?: boolean, makeNonConfigurable
 
   const originalMethod = validateAndExtractMethodFromDescriptor(actualDesc);
   const isStatic = inp.placement === 'static';
-  if (out.placement === 'own') {
-    out.placement = 'prototype';
-  }
 
   actualDesc.get = function (this: any): any {
     return getterCommon(
