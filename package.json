@@ -3,7 +3,16 @@
   "version": "1.2.1",
   "description": "Lazily evaluates a getter on an object and caches the returned value",
   "main": "LazyGetter.js",
+  "browser": "_bundle/umd.js",
+  "jsdelivr": "_bundle/umd.min.js",
+  "fesm5": "_bundle/fesm5.js",
+  "esm5": "_bundle/fesm5.js",
+  "fesm2015": "_bundle/fesm2015.js",
+  "esm2015": "_bundle/fesm5.js",
   "es2015": "esm2015/LazyGetter.js",
+  "types": "LazyGetter.d.ts",
+  "module": "_bundle/fesm5.js",
+  "typings": "LazyGetter.d.ts",
   "scripts": {
     "test:babel:legacy": "babel --config-file ./.babelrc.legacy -o test/LazyGetter.legacy.js test/LazyGetter.js",
     "test:babel:new": "babel --config-file ./.babelrc.new -o test/LazyGetter.new.js test/LazyGetter.js",
@@ -12,8 +21,6 @@
     "pretest": "concurrently -n build:src,build:test,clean \"alo build --targets cjs\" \"npm run test:compile && ts-node pretest-postprocess.ts\" \"rimraf coverage\"",
     "build": "alo build",
     "lint": "alo tslint -p ./tsconfig.lib.json",
-    "test-legacy": "nyc mocha --opts ./mocha.opts test/LazyGetter.legacy.js",
-    "pretest-legacy": "npm run pretest",
     "lint:fix": "npm run lint -- --fix"
   },
   "repository": {
@@ -60,7 +67,7 @@
     "@types/mocha": "^5.2.6",
     "@types/node": "~11.10.4",
     "chai": "^4.2.0",
-    "concurrently": "~4.0.0",
+    "concurrently": "~4.1.0",
     "coveralls": "~3.0.3",
     "cross-spawn": "~6.0.5",
     "lodash": "~4.17.5",
@@ -73,14 +80,5 @@
     "tslib": "~1.9.0",
     "typescript": "^3.3.3"
   },
-  "dependencies": {},
-  "browser": "_bundle/umd.js",
-  "jsdelivr": "_bundle/umd.min.js",
-  "fesm5": "_bundle/fesm5.js",
-  "esm5": "_bundle/fesm5.js",
-  "fesm2015": "_bundle/fesm2015.js",
-  "esm2015": "_bundle/fesm5.js",
-  "types": "LazyGetter.d.ts",
-  "module": "_bundle/fesm5.js",
-  "typings": "LazyGetter.d.ts"
+  "dependencies": {}
 }
