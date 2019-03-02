@@ -1,5 +1,5 @@
 {
-  "name": "typescript-lazy-get-decorator",
+  "name": "lazy-get-decorator",
   "version": "1.2.1",
   "description": "Lazily evaluates a getter on an object and caches the returned value",
   "main": "LazyGetter.js",
@@ -14,10 +14,6 @@
   "typings": "LazyGetter.d.ts",
   "types": "LazyGetter.d.ts",
   "scripts": {
-    "test": "nyc ava --no-cache --color --verbose test",
-    "pretest": "npm run clean:test && rimraf coverage && tsc -p ./tsconfig.test.json",
-    "posttest": "npm run clean:test",
-    "clean:test": "rimraf ./test/*.js ./test/*.js.map ./.nyc_output ./src/*.js ./src/*.js.map",
     "build": "alo build",
     "lint": "alo tslint -p ./tsconfig.test.json",
     "lint:fix": "npm run lint -- --fix"
