@@ -14,8 +14,8 @@ before_install:
 install: yarn install --check-files --ignore-engines
 
 script:
-  - yarn run lint
-  - yarn test
+  - npm run lint
+  - npm test
 
 after_success: cat ./coverage/lcov.info | coveralls
 after_script: if [[ $GH_TOKEN ]]; then greenkeeper-lockfile-upload; fi;
@@ -33,7 +33,7 @@ jobs:
         - npm i -g yarn
         - *prepKey
       before_script:
-        - yarn run build
+        - npm run build
         - alo copy-files
         - alo clean-pkg-json
         - alo clean-dist
