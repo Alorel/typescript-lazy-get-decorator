@@ -8,6 +8,10 @@ interface NewDescriptor extends PropertyDescriptor {
   placement: string;
 }
 
+function defaultFilter(): boolean {
+  return true;
+}
+
 function validateAndExtractMethodFromDescriptor(desc: PropertyDescriptor): Function {
   const originalMethod = <Function>desc.get;
 
@@ -27,22 +31,25 @@ function getterCommon(target: any, //tslint:disable-line:parameters-max-number
                       originalMethod: Function,
                       thisArg: any,
                       args: IArguments,
-                      setProto?: boolean,
-                      makeNonConfigurable?: boolean): any {
+                      setProto: boolean | undefined,
+                      makeNonConfigurable: boolean | undefined,
+                      resultSelector: ResultSelectorFn): any {
   const value = originalMethod.apply(thisArg, <any>args);
 
-  const newDescriptor: PropertyDescriptor = {
-    configurable: !makeNonConfigurable,
-    enumerable,
-    value
-  };
+  if (resultSelector(value)) {
+    const newDescriptor: PropertyDescriptor = {
+      configurable: !makeNonConfigurable,
+      enumerable,
+      value
+    };
 
-  if (isStatic || setProto) {
-    Object.defineProperty(target, key, newDescriptor);
-  }
+    if (isStatic || setProto) {
+      Object.defineProperty(target, key, newDescriptor);
+    }
 
-  if (!isStatic) {
-    Object.defineProperty(thisArg, key, newDescriptor);
+    if (!isStatic) {
+      Object.defineProperty(thisArg, key, newDescriptor);
+    }
   }
 
   return value;
@@ -51,8 +58,9 @@ function getterCommon(target: any, //tslint:disable-line:parameters-max-number
 function decorateLegacy(target: any,
                         key: PropertyKey,
                         descriptor: PropertyDescriptor,
-                        setProto?: boolean,
-                        makeNonConfigurable?: boolean): PropertyDescriptor {
+                        setProto: boolean | undefined,
+                        makeNonConfigurable: boolean | undefined,
+                        resultSelector: ResultSelectorFn): PropertyDescriptor {
   /* istanbul ignore if */
   if (!descriptor) {
     descriptor = <any>Object.getOwnPropertyDescriptor(target, key);
@@ -77,13 +85,17 @@ function decorateLegacy(target: any,
         this,
         arguments,
         setProto,
-        makeNonConfigurable
+        makeNonConfigurable,
+        resultSelector
       );
     }
   });
 }
 
-function decorateNew(inp: NewDescriptor, setProto?: boolean, makeNonConfigurable?: boolean): NewDescriptor {
+function decorateNew(inp: NewDescriptor,
+                     setProto: boolean | undefined,
+                     makeNonConfigurable: boolean | undefined,
+                     resultSelector: ResultSelectorFn): NewDescriptor {
   const out: NewDescriptor = Object.assign({}, inp);
   if (out.descriptor) {
     out.descriptor = Object.assign({}, out.descriptor);
@@ -103,7 +115,8 @@ function decorateNew(inp: NewDescriptor, setProto?: boolean, makeNonConfigurable
       this,
       arguments,
       setProto,
-      makeNonConfigurable
+      makeNonConfigurable,
+      resultSelector
     );
   };
 
@@ -114,12 +127,18 @@ function decorateNew(inp: NewDescriptor, setProto?: boolean, makeNonConfigurable
  * Evaluate the getter function and cache the result
  * @param {boolean} [setProto=false] Set the value on the class prototype as well. Only applies to non-static getters.
  * @param {boolean} [makeNonConfigurable=false] Set to true to make the resolved property non-configurable
+ * @param {ResultSelectorFn} [resultSelector] A filter function that must return true for the value to cached
  * @return A Typescript decorator function
  */
-export function LazyGetter(setProto?: boolean, makeNonConfigurable?: boolean): MethodDecorator {
+export function LazyGetter(setProto?: boolean,
+                           makeNonConfigurable?: boolean,
+                           resultSelector: ResultSelectorFn = defaultFilter): MethodDecorator {
   return (targetOrDesc: any, key: PropertyKey, descriptor: PropertyDescriptor): PropertyDescriptor | NewDescriptor => {
     return key === undefined ?
-      decorateNew(targetOrDesc, setProto, makeNonConfigurable) :
-      decorateLegacy(targetOrDesc, key, descriptor, setProto, makeNonConfigurable);
+      decorateNew(targetOrDesc, setProto, makeNonConfigurable, resultSelector) :
+      decorateLegacy(targetOrDesc, key, descriptor, setProto, makeNonConfigurable, resultSelector);
   };
 }
+
+/** A filter function that must return true for the value to cached */
+export type ResultSelectorFn = (v: any) => boolean;

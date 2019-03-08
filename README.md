@@ -22,9 +22,10 @@ Previously known as [typescript-lazy-get-decorator](https://www.npmjs.com/packag
  * Evaluate the getter function and cache the result
  * @param {boolean} [setProto=false] Set the value on the class prototype as well. Only applies to non-static getters.
  * @param {boolean} [makeNonConfigurable=false] Set to true to make the resolved property non-configurable
- * @return {(target: any, key: string, descriptor: PropertyDescriptor) => void} A Typescript decorator function
+ * @param {ResultSelectorFn} [resultSelector] A filter function that must return true for the value to cached
+ * @return A Typescript decorator function
  */
-function LazyGetter(setProto: boolean = false, makeNonConfigurable = false) {}
+function LazyGetter(setProto?: boolean, makeNonConfigurable?: boolean, resultSelector?: (value: any) => boolean): MethodDecorator;
 ```
 
 # Usage
@@ -87,3 +88,25 @@ Output:
     lazyNoProtoValue
     lazyWithProtoValue
     lazyWithProtoValue
+
+# Using the result selector
+
+```typescript
+import {LazyGetter} from 'lazy-get-decorator';
+
+class MyClass {
+  public readonly someCondition = 10;
+  
+  @LazyGetter(false, false, (v: number) => v === 10)
+  public get prop1(): number {
+    // This will get cached
+    return this.someCondition;
+  }
+  
+  @LazyGetter(false, false, (v: number) => v === 1)
+  public get prop2(): number {
+    // This won't get cached
+    return this.someCondition;
+  }
+}
+```

@@ -5,174 +5,203 @@ const tslibDecorate = require('tslib').__decorate;
 
 describe(`LazyGetter (${TEST_TYPE})`, () => {
   describe('Valid decorations', () => {
-    class MyTestClass {
-      static staticGets = 0;
-      static instanceGets = 0;
+    describe('Default result selector', () => {
+      class MyTestClass {
+        static staticGets = 0;
+        static instanceGets = 0;
 
-      @LazyGetter(false)
-      static get staticGetterFalse() {
-        MyTestClass.staticGets++;
+        @LazyGetter(false)
+        static get staticGetterFalse() {
+          MyTestClass.staticGets++;
 
-        return 1;
+          return 1;
+        }
+
+        @LazyGetter()
+        static get staticGetterDefault() {
+          MyTestClass.staticGets++;
+
+          return 1;
+        }
+
+        @LazyGetter(true)
+        static get staticGetterTrue() {
+          MyTestClass.staticGets++;
+
+          return 1;
+        }
+
+        @LazyGetter(true)
+        get instanceGetterTrue() {
+          MyTestClass.instanceGets++;
+
+          return 1;
+        }
+
+        @LazyGetter()
+        get instanceGetterDefault() {
+          MyTestClass.instanceGets++;
+
+          return 1;
+        }
+
+        @LazyGetter(false)
+        get instanceGetterFalse() {
+          MyTestClass.instanceGets++;
+
+          return 1;
+        }
+
+        @LazyGetter(false, true)
+        get lazyGetterNoConfig() {
+          return 1;
+        }
+
+        @LazyGetter(false)
+        get lazyGetterConfig() {
+          return 1;
+        }
       }
 
-      @LazyGetter()
-      static get staticGetterDefault() {
-        MyTestClass.staticGets++;
+      beforeEach('Reset MyTestClass', () => {
+        MyTestClass.staticGets = 0;
+        MyTestClass.instanceGets = 0;
+      });
 
-        return 1;
-      }
+      describe('Static', () => {
+        it('false', () => {
+          expect(MyTestClass.staticGets).to.eq(0, 'Initial gets = 0');
 
-      @LazyGetter(true)
-      static get staticGetterTrue() {
-        MyTestClass.staticGets++;
+          noop(MyTestClass.staticGetterFalse);
+          expect(MyTestClass.staticGets).to.eq(1, 'Gets = 1');
 
-        return 1;
-      }
+          noop(MyTestClass.staticGetterFalse);
+          expect(MyTestClass.staticGets).to.eq(1, 'Gets still 1');
+        });
 
-      @LazyGetter(true)
-      get instanceGetterTrue() {
-        MyTestClass.instanceGets++;
+        it('default', () => {
+          expect(MyTestClass.staticGets).to.eq(0, 'Initial gets = 0');
 
-        return 1;
-      }
+          noop(MyTestClass.staticGetterDefault);
+          expect(MyTestClass.staticGets).to.eq(1, 'Gets = 1');
 
-      @LazyGetter()
-      get instanceGetterDefault() {
-        MyTestClass.instanceGets++;
+          noop(MyTestClass.staticGetterDefault);
+          expect(MyTestClass.staticGets).to.eq(1, 'Gets still 1');
+        });
 
-        return 1;
-      }
+        it('true', () => {
+          expect(MyTestClass.staticGets).to.eq(0, 'Initial gets = 1');
 
-      @LazyGetter(false)
-      get instanceGetterFalse() {
-        MyTestClass.instanceGets++;
+          noop(MyTestClass.staticGetterTrue);
+          expect(MyTestClass.staticGets).to.eq(1, 'Gets = 1');
 
-        return 1;
-      }
+          noop(MyTestClass.staticGetterTrue);
+          expect(MyTestClass.staticGets).to.eq(1, 'Gets still 1');
+        });
+      });
 
-      @LazyGetter(false, true)
-      get lazyGetterNoConfig() {
-        return 1;
-      }
+      describe('Instance', () => {
+        it('Instance getter: false', () => {
+          expect(MyTestClass.instanceGets).to.eq(0, 'Initial gets = 0');
 
-      @LazyGetter(false)
-      get lazyGetterConfig() {
-        return 1;
-      }
-    }
+          const inst1 = new MyTestClass();
 
-    beforeEach('Reset MyTestClass', () => {
-      MyTestClass.staticGets = 0;
-      MyTestClass.instanceGets = 0;
+          noop(inst1.instanceGetterFalse);
+          expect(MyTestClass.instanceGets).to.eq(1, 'Gets = 1');
+
+          noop(inst1.instanceGetterFalse);
+          expect(MyTestClass.instanceGets).to.eq(1, 'Gets still 1');
+
+          const inst2 = new MyTestClass();
+
+          noop(inst2.instanceGetterFalse);
+          expect(MyTestClass.instanceGets).to.eq(2, 'Gets = 2');
+
+          noop(inst2.instanceGetterFalse);
+          expect(MyTestClass.instanceGets).to.eq(2, 'Gets still 1');
+        });
+
+        it('Instance getter: default', () => {
+          expect(MyTestClass.instanceGets).to.eq(0, 'Initial gets = 0');
+
+          const inst1 = new MyTestClass();
+
+          noop(inst1.instanceGetterDefault);
+          expect(MyTestClass.instanceGets).to.eq(1, 'Gets = 1');
+
+          noop(inst1.instanceGetterDefault);
+          expect(MyTestClass.instanceGets).to.eq(1, 'Gets still 1');
+
+          const inst2 = new MyTestClass();
+
+          noop(inst2.instanceGetterDefault);
+          expect(MyTestClass.instanceGets).to.eq(2, 'Gets = 2');
+
+          noop(inst2.instanceGetterDefault);
+          expect(MyTestClass.instanceGets).to.eq(2, 'Gets still 2');
+        });
+
+        it('Instance getter: true', () => {
+          expect(MyTestClass.instanceGets).to.eq(0, 'Initial gets = 0');
+
+          const inst1 = new MyTestClass();
+
+          noop(inst1.instanceGetterTrue);
+          expect(MyTestClass.instanceGets).to.eq(1, 'Gets = 1');
+
+          noop(inst1.instanceGetterTrue);
+          expect(MyTestClass.instanceGets).to.eq(1, 'Gets still 1');
+
+          const inst2 = new MyTestClass();
+
+          noop(inst2.instanceGetterTrue);
+          expect(MyTestClass.instanceGets).to.eq(1, '2nd instance gets = 1');
+
+          noop(inst2.instanceGetterTrue);
+          expect(MyTestClass.instanceGets).to.eq(1, '2nd instance gets still 1');
+        });
+      });
+
+      it('Configurable getter', () => {
+        const i = new MyTestClass();
+        noop(i.lazyGetterConfig);
+
+        expect(Object.getOwnPropertyDescriptor(i, 'lazyGetterConfig').configurable).to.eq(true);
+      });
+
+      it('Non-configurable getter', () => {
+        const i = new MyTestClass();
+        noop(i.lazyGetterNoConfig);
+
+        expect(Object.getOwnPropertyDescriptor(i, 'lazyGetterNoConfig').configurable).to.eq(false);
+      });
     });
 
-    describe('Static', () => {
-      it('false', () => {
-        expect(MyTestClass.staticGets).to.eq(0, 'Initial gets = 0');
+    describe('Custom result selector', () => {
+      class Class {
+        static gets = 0;
 
-        noop(MyTestClass.staticGetterFalse);
-        expect(MyTestClass.staticGets).to.eq(1, 'Gets = 1');
+        @LazyGetter(false, false, v => v === 2)
+        static get next() {
+          return Class.gets++;
+        }
+      }
 
-        noop(MyTestClass.staticGetterFalse);
-        expect(MyTestClass.staticGets).to.eq(1, 'Gets still 1');
+      it('1st call should return 0', () => {
+        expect(Class.next).to.eq(0);
       });
 
-      it('default', () => {
-        expect(MyTestClass.staticGets).to.eq(0, 'Initial gets = 0');
-
-        noop(MyTestClass.staticGetterDefault);
-        expect(MyTestClass.staticGets).to.eq(1, 'Gets = 1');
-
-        noop(MyTestClass.staticGetterDefault);
-        expect(MyTestClass.staticGets).to.eq(1, 'Gets still 1');
+      it('2nd call should return 1', () => {
+        expect(Class.next).to.eq(1);
       });
 
-      it('true', () => {
-        expect(MyTestClass.staticGets).to.eq(0, 'Initial gets = 1');
-
-        noop(MyTestClass.staticGetterTrue);
-        expect(MyTestClass.staticGets).to.eq(1, 'Gets = 1');
-
-        noop(MyTestClass.staticGetterTrue);
-        expect(MyTestClass.staticGets).to.eq(1, 'Gets still 1');
-      });
-    });
-
-    describe('Instance', () => {
-      it('Instance getter: false', () => {
-        expect(MyTestClass.instanceGets).to.eq(0, 'Initial gets = 0');
-
-        const inst1 = new MyTestClass();
-
-        noop(inst1.instanceGetterFalse);
-        expect(MyTestClass.instanceGets).to.eq(1, 'Gets = 1');
-
-        noop(inst1.instanceGetterFalse);
-        expect(MyTestClass.instanceGets).to.eq(1, 'Gets still 1');
-
-        const inst2 = new MyTestClass();
-
-        noop(inst2.instanceGetterFalse);
-        expect(MyTestClass.instanceGets).to.eq(2, 'Gets = 2');
-
-        noop(inst2.instanceGetterFalse);
-        expect(MyTestClass.instanceGets).to.eq(2, 'Gets still 1');
+      it('3rd call should return 2', () => {
+        expect(Class.next).to.eq(2);
       });
 
-      it('Instance getter: default', () => {
-        expect(MyTestClass.instanceGets).to.eq(0, 'Initial gets = 0');
-
-        const inst1 = new MyTestClass();
-
-        noop(inst1.instanceGetterDefault);
-        expect(MyTestClass.instanceGets).to.eq(1, 'Gets = 1');
-
-        noop(inst1.instanceGetterDefault);
-        expect(MyTestClass.instanceGets).to.eq(1, 'Gets still 1');
-
-        const inst2 = new MyTestClass();
-
-        noop(inst2.instanceGetterDefault);
-        expect(MyTestClass.instanceGets).to.eq(2, 'Gets = 2');
-
-        noop(inst2.instanceGetterDefault);
-        expect(MyTestClass.instanceGets).to.eq(2, 'Gets still 2');
+      it('4th call should return 2', () => {
+        expect(Class.next).to.eq(2);
       });
-
-      it('Instance getter: true', () => {
-        expect(MyTestClass.instanceGets).to.eq(0, 'Initial gets = 0');
-
-        const inst1 = new MyTestClass();
-
-        noop(inst1.instanceGetterTrue);
-        expect(MyTestClass.instanceGets).to.eq(1, 'Gets = 1');
-
-        noop(inst1.instanceGetterTrue);
-        expect(MyTestClass.instanceGets).to.eq(1, 'Gets still 1');
-
-        const inst2 = new MyTestClass();
-
-        noop(inst2.instanceGetterTrue);
-        expect(MyTestClass.instanceGets).to.eq(1, '2nd instance gets = 1');
-
-        noop(inst2.instanceGetterTrue);
-        expect(MyTestClass.instanceGets).to.eq(1, '2nd instance gets still 1');
-      });
-    });
-
-    it('Configurable getter', () => {
-      const i = new MyTestClass();
-      noop(i.lazyGetterConfig);
-
-      expect(Object.getOwnPropertyDescriptor(i, 'lazyGetterConfig').configurable).to.eq(true);
-    });
-
-    it('Non-configurable getter', () => {
-      const i = new MyTestClass();
-      noop(i.lazyGetterNoConfig);
-
-      expect(Object.getOwnPropertyDescriptor(i, 'lazyGetterNoConfig').configurable).to.eq(false);
     });
   });
 
@@ -210,4 +239,4 @@ describe(`LazyGetter (${TEST_TYPE})`, () => {
       }).to.throw('@LazyGetter target must be configurable');
     });
   });
-})
+});
