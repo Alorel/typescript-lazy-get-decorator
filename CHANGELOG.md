@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/Alorel/typescript-lazy-get-decorator/compare/2.0.0...2.1.0) (2019-03-08)
+
+
+### Features
+
+* Cache filter support ([56213ef](https://github.com/Alorel/typescript-lazy-get-decorator/commit/56213ef))
+
 # [2.0.0](https://github.com/Alorel/typescript-lazy-get-decorator/compare/1.2.2...2.0.0) (2019-03-02)
 
 
