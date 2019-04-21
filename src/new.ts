@@ -11,7 +11,7 @@ export function decorateNew(inp: NewDescriptor,
   if (out.descriptor) {
     out.descriptor = Object.assign({}, out.descriptor);
   }
-  const actualDesc: PropertyDescriptor = <any>(out.descriptor || out); //incorrect babel implementation support
+  const actualDesc: PropertyDescriptor = <any>(out.descriptor || /* istanbul ignore next */ out);
 
   const originalMethod = validateAndExtractMethodFromDescriptor(actualDesc);
   const isStatic = inp.placement === 'static';

@@ -28,7 +28,10 @@ function LazyGetter(setProto?: boolean,
       if (typeof desc === 'undefined') {
         isLegacy = false;
         prop = (<NewDescriptor>targetOrDesc).key;
-        desc = Object.assign({}, (<NewDescriptor>targetOrDesc).descriptor || targetOrDesc);
+        desc = Object.assign(
+          {},
+          (<NewDescriptor>targetOrDesc).descriptor || /* istanbul ignore next */ targetOrDesc
+        );
       }
 
       return decorateNew(targetOrDesc, setProto, makeNonConfigurable, resultSelector);
@@ -36,7 +39,10 @@ function LazyGetter(setProto?: boolean,
       if (typeof desc === 'undefined') {
         isLegacy = true;
         prop = key;
-        desc = Object.assign({}, descriptor || Object.getOwnPropertyDescriptor(targetOrDesc, key));
+        desc = Object.assign(
+          {},
+          descriptor || /* istanbul ignore next */ Object.getOwnPropertyDescriptor(targetOrDesc, key)
+        );
       }
 
       return decorateLegacy(targetOrDesc, key, descriptor, setProto, makeNonConfigurable, resultSelector);
