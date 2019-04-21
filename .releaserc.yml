@@ -4,18 +4,22 @@ tagFormat: '${version}'
 pkgRoot: './dist'
 
 prepare:
-- '@semantic-release/changelog'
-- '@alorel-personal/semantic-release'
-- path: '@semantic-release/exec'
-  cmd: ./node_modules/.bin/alo copy-files
-- '@semantic-release/npm'
-- path: '@semantic-release/git'
-  message: 'chore(release): ${nextRelease.version}'
-  assets:
-  - CHANGELOG.md
-  - README.md
-  - package.json
-  - yarn.lock
+  - '@semantic-release/changelog'
+  - '@alorel-personal/semantic-release'
+  - path: '@semantic-release/exec'
+    cmd: ./node_modules/.bin/alo copy-files
+  - path: '@semantic-release/exec'
+    cmd: ./node_modules/.bin/alo clean-dist
+  - path: '@semantic-release/exec'
+    cmd: ./node_modules/.bin/alo clean-pkg-json
+  - '@semantic-release/npm'
+  - path: '@semantic-release/git'
+    message: 'chore(release): ${nextRelease.version}'
+    assets:
+      - CHANGELOG.md
+      - README.md
+      - package.json
+      - yarn.lock
 
 generateNotes:
   config: '@alorel-personal/conventional-changelog-alorel'
