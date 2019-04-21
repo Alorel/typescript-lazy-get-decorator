@@ -16,8 +16,6 @@ build:
     - declaration
     - fesm5
     - fesm2015
-    - esm5
-    - esm2015
     - umd
   entry: src/LazyGetter.ts
   license-banner: true

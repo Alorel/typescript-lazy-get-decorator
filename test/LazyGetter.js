@@ -239,4 +239,108 @@ describe(`LazyGetter (${TEST_TYPE})`, () => {
       }).to.throw('@LazyGetter target must be configurable');
     });
   });
+
+  describe('Reset descriptor', () => {
+    describe('Instance', () => {
+      let dec, inst;
+
+      before('Instantiate', () => {
+        dec = LazyGetter();
+
+        class MyClass {
+          count = 0;
+
+          @dec
+          get computed() {
+            return this.count++;
+          }
+        }
+
+        inst = new MyClass();
+      });
+
+      it('1st call should return 0', () => {
+        expect(inst.computed).to.eq(0);
+      });
+
+      it('2nd call should return 0', () => {
+        expect(inst.computed).to.eq(0);
+      });
+
+      it('3rd call should return 1', () => {
+        dec.reset(inst);
+        expect(inst.computed).to.eq(1);
+      });
+
+      it('4th call should return 1', () => {
+        expect(inst.computed).to.eq(1);
+      });
+    });
+
+    describe('Static', () => {
+      let count = 0;
+      const dec = LazyGetter();
+
+      class MyClass {
+        @dec
+        static get computed() {
+          return count++;
+        }
+      }
+
+      it('1st call should return 0', () => {
+        expect(MyClass.computed).to.eq(0);
+      });
+
+      it('2nd call should return 0', () => {
+        expect(MyClass.computed).to.eq(0);
+      });
+
+      it('3rd call should return 1', () => {
+        dec.reset(MyClass);
+        expect(MyClass.computed).to.eq(1);
+      });
+
+      it('4th call should return 1', () => {
+        expect(MyClass.computed).to.eq(1);
+      });
+    });
+
+    describe('Errors', () => {
+      const specs = [
+        ['Unable to restore descriptor on an undefined target', () => {
+          const dec = LazyGetter();
+
+          class C {
+            @dec
+            get m() {
+              return 1
+            }
+          }
+
+          dec.reset();
+        }],
+        ['Unable to restore descriptor. Did you remember to apply your decorator to a method?', () => {
+          LazyGetter().reset(1);
+        }],
+        ['This decoration modifies the class prototype and cannot be reset.', () => {
+          const dec = LazyGetter(true);
+
+          class MC {
+            @dec
+            get m() {
+            }
+          }
+
+          dec.reset();
+        }]
+      ];
+
+      for (const [txt, fn] of specs) {
+        it(txt, () => {
+          expect(fn).to.throw(txt);
+        });
+      }
+    });
+  });
 });

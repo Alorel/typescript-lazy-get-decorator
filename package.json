@@ -12,7 +12,7 @@
     "pretest": "concurrently -n build:src,build:test,clean \"alo build --targets cjs\" \"npm run test:compile && ts-node pretest-postprocess.ts\" \"rimraf coverage\"",
     "build": "alo build",
     "lint": "alo tslint -p ./tsconfig.lib.json",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm --scripts-prepend-node-path=auto run lint -- --fix"
   },
   "repository": {
     "type": "git",
@@ -59,6 +59,7 @@
     "@types/lodash": "~4.14.122",
     "@types/mocha": "^5.2.6",
     "@types/node": "~11.13.0",
+    "babel-plugin-istanbul": "~5.1.2",
     "chai": "~4.2.0",
     "concurrently": "~4.1.0",
     "coveralls": "~3.0.3",
@@ -73,14 +74,5 @@
     "tslib": "~1.9.0",
     "typescript": "^3.3.3"
   },
-  "dependencies": {},
-  "browser": "_bundle/umd.js",
-  "jsdelivr": "_bundle/umd.min.js",
-  "fesm5": "_bundle/fesm5.js",
-  "esm5": "_bundle/esm5/LazyGetter.js",
-  "fesm2015": "_bundle/fesm2015.js",
-  "esm2015": "_bundle/esm2015/LazyGetter.js",
-  "types": "LazyGetter.d.ts",
-  "module": "_bundle/fesm5.js",
-  "typings": "LazyGetter.d.ts"
+  "dependencies": {}
 }
