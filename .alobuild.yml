@@ -4,19 +4,19 @@ global:
 
 copy-files:
   from:
-  - package.json
-  - LICENSE
-  - CHANGELOG.md
-  - README.md
+    - package.json
+    - LICENSE
+    - CHANGELOG.md
+    - README.md
   to: *dd
 
 build:
   targets:
-  - cjs
-  - declaration
-  - fesm5
-  - fesm2015
-  - umd
+    - cjs
+    - declaration
+    - fesm5
+    - fesm2015
+    - umd
   entry: src/LazyGetter.ts
   license-banner: true
   out: *dd

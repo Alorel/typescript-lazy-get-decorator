@@ -1,4 +1,5 @@
 {
+  "sourceMaps": "inline",
   "plugins": [
     [
       "@babel/plugin-proposal-decorators",
@@ -11,6 +12,7 @@
       {
         "loose": true
       }
-    ]
+    ],
+    "istanbul"
   ]
 }

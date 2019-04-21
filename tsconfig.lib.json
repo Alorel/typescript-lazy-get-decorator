@@ -5,7 +5,7 @@
     "sourceMap": true,
     "rootDir": "./src"
   },
-  "files": [
-    "./src/LazyGetter.ts"
+  "include": [
+    "src"
   ]
 }

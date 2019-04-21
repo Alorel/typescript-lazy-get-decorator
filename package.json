@@ -12,7 +12,7 @@
     "pretest": "concurrently -n build:src,build:test,clean \"alo build --targets cjs\" \"npm run test:compile && ts-node pretest-postprocess.ts\" \"rimraf coverage\"",
     "build": "alo build",
     "lint": "alo tslint -p ./tsconfig.lib.json",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm --scripts-prepend-node-path=auto run lint -- --fix"
   },
   "repository": {
     "type": "git",
@@ -59,6 +59,7 @@
     "@types/lodash": "~4.14.122",
     "@types/mocha": "^5.2.6",
     "@types/node": "~11.13.0",
+    "babel-plugin-istanbul": "~5.1.2",
     "chai": "~4.2.0",
     "concurrently": "~4.1.0",
     "coveralls": "~3.0.3",
