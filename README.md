@@ -110,3 +110,63 @@ class MyClass {
   }
 }
 ```
+
+# Resetting LazyGetter
+
+The cached value can be reset if the decorator does not modify the class prototype,
+i.e. is not called as `@LazyGetter(true)`:
+
+```typescript
+import {LazyGetter} from 'lazy-get-decorator';
+
+const instanceDec = LazyGetter();
+const staticDec = LazyGetter();
+
+class MyClass {
+  public instanceCount = 0;
+  public static staticCount = 0;
+  
+  @instanceDec
+  public get count(): number {
+    return this.instanceCount++;
+  }
+  
+  @staticDec
+  public static get count(): number {
+    return MyClass.staticCount++;
+  }
+}
+
+const inst = new MyClass();
+
+console.log(inst.count); // 0
+console.log(inst.count); // 0
+instanceDec.reset(inst);
+console.log(inst.count); // 1
+
+console.log(MyClass.count); // 0
+console.log(MyClass.count); // 0
+staticDec.reset(MyClass);
+console.log(MyClass.count); // 1
+```
+
+Resetting the decoration performs the following steps:
+
+1. Resets the property descriptor to its state before the decoration
+1. Re-applies the decorator
+
+This means that any descriptor changes made by other decorators may be lost, therefore you
+should ensure `LazyGetter` is applied last if you intend on resetting it, i.e. place it
+at the very top of your decorators list:
+
+```typescript
+class MyClass {
+
+  @LazyGetter()
+  @decorator2
+  @decorator1
+  get getter() {
+    return 1;
+  }
+}
+```
