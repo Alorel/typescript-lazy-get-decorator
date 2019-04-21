@@ -12,7 +12,7 @@ type DecoratorReturn = PropertyDescriptor | NewDescriptor;
  * @param {boolean} [setProto=false] Set the value on the class prototype as well. Only applies to non-static getters.
  * @param {boolean} [makeNonConfigurable=false] Set to true to make the resolved property non-configurable
  * @param {ResultSelectorFn} [resultSelector] A filter function that must return true for the value to cached
- * @return A Typescript decorator function
+ * @return A decorator function
  */
 function LazyGetter(setProto?: boolean,
                     makeNonConfigurable?: boolean,
