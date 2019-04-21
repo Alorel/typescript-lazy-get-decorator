@@ -1,7 +1,7 @@
 # Lazy Get decorator
 
-[![Build Status](https://travis-ci.org/Alorel/typescript-lazy-get-decorator.png?branch=2.1.0)](https://travis-ci.org/Alorel/typescript-lazy-get-decorator)
-[![Coverage Status](https://coveralls.io/repos/github/Alorel/typescript-lazy-get-decorator/badge.svg?branch=2.1.0)](https://coveralls.io/github/Alorel/typescript-lazy-get-decorator?branch=2.1.0)
+[![Build Status](https://travis-ci.org/Alorel/typescript-lazy-get-decorator.png?branch=2.2.0)](https://travis-ci.org/Alorel/typescript-lazy-get-decorator)
+[![Coverage Status](https://coveralls.io/repos/github/Alorel/typescript-lazy-get-decorator/badge.svg?branch=2.2.0)](https://coveralls.io/github/Alorel/typescript-lazy-get-decorator?branch=2.2.0)
 [![Greenkeeper badge](https://badges.greenkeeper.io/Alorel/typescript-lazy-get-decorator.svg)](https://greenkeeper.io/)
 
 [![NPM](https://nodei.co/npm/lazy-get-decorator.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/lazy-get-decorator)

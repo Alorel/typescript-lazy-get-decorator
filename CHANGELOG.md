@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/Alorel/typescript-lazy-get-decorator/compare/2.1.0...2.2.0) (2019-04-21)
+
+
+### Features
+
+* Allow clearing the cached value ([132b1ed](https://github.com/Alorel/typescript-lazy-get-decorator/commit/132b1ed)), closes [#84](https://github.com/Alorel/typescript-lazy-get-decorator/issues/84)
+
 # [2.1.0](https://github.com/Alorel/typescript-lazy-get-decorator/compare/2.0.0...2.1.0) (2019-03-08)
 
 
