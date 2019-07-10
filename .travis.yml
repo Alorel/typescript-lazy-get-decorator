@@ -8,7 +8,6 @@ cache:
 
 before_install:
   - npm i -g greenkeeper-lockfile yarn
-  - &prepKey if [[ $GH_TOKEN ]]; then ./prepare-gpg-key.sh; fi;
   - greenkeeper-lockfile-update
 
 install: yarn install --check-files --ignore-engines
@@ -29,9 +28,7 @@ jobs:
   include:
     - stage: Release
       node_js: stable
-      before_install:
-        - npm i -g yarn
-        - *prepKey
+      before_install: npm i -g yarn
       before_script:
         - npm run build
         - alo copy-files

@@ -46,7 +46,7 @@
     "@alorel-personal/conventional-changelog-alorel": "2.1.0",
     "@alorel-personal/semantic-release": "1.4.0",
     "@alorel-personal/tslint-rules": "4.1.1",
-    "@babel/cli": "^7.5.0",
+    "@babel/cli": "~7.5.0",
     "@babel/core": "~7.5.0",
     "@babel/plugin-proposal-class-properties": "~7.5.0",
     "@babel/plugin-proposal-decorators": "~7.4.4",
@@ -74,14 +74,5 @@
     "tslib": "~1.10.0",
     "typescript": "^3.3.3"
   },
-  "dependencies": {},
-  "browser": "_bundle/umd.js",
-  "jsdelivr": "_bundle/umd.min.js",
-  "fesm5": "_bundle/fesm5.js",
-  "esm5": "_bundle/fesm5.js",
-  "fesm2015": "_bundle/fesm2015.js",
-  "esm2015": "_bundle/fesm5.js",
-  "types": "LazyGetter.d.ts",
-  "module": "_bundle/fesm5.js",
-  "typings": "LazyGetter.d.ts"
+  "dependencies": {}
 }
