@@ -2,12 +2,15 @@ import {getterCommon, validateAndExtractMethodFromDescriptor} from './common';
 import {ResultSelectorFn} from './ResultSelectorFn';
 
 /** @internal */
-export function decorateLegacy(target: any,
-                               key: PropertyKey,
-                               descriptor: PropertyDescriptor,
-                               setProto: boolean | undefined,
-                               makeNonConfigurable: boolean | undefined,
-                               resultSelector: ResultSelectorFn): PropertyDescriptor {
+export function decorateLegacy(
+  target: any,
+  key: PropertyKey,
+  descriptor: PropertyDescriptor,
+  setProto: boolean,
+  makeNonConfigurable: boolean,
+  //tslint:enable:bool-param-default
+  resultSelector: ResultSelectorFn
+): PropertyDescriptor {
   /* istanbul ignore if */
   if (!descriptor) {
     descriptor = <any>Object.getOwnPropertyDescriptor(target, key);

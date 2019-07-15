@@ -3,10 +3,12 @@ import {NewDescriptor} from './NewDescriptor';
 import {ResultSelectorFn} from './ResultSelectorFn';
 
 /** @internal */
-export function decorateNew(inp: NewDescriptor,
-                            setProto: boolean | undefined,
-                            makeNonConfigurable: boolean | undefined,
-                            resultSelector: ResultSelectorFn): NewDescriptor {
+export function decorateNew(
+  inp: NewDescriptor,
+  setProto: boolean,
+  makeNonConfigurable: boolean,
+  resultSelector: ResultSelectorFn
+): NewDescriptor {
   const out: NewDescriptor = Object.assign({}, inp);
   if (out.descriptor) {
     out.descriptor = Object.assign({}, out.descriptor);

@@ -19,16 +19,18 @@ export function validateAndExtractMethodFromDescriptor(desc: PropertyDescriptor)
 }
 
 /** @internal */
-export function getterCommon(target: any, //tslint:disable-line:parameters-max-number
-                             key: PropertyKey,
-                             isStatic: boolean,
-                             enumerable: boolean,
-                             originalMethod: Function,
-                             thisArg: any,
-                             args: IArguments,
-                             setProto: boolean | undefined,
-                             makeNonConfigurable: boolean | undefined,
-                             resultSelector: ResultSelectorFn): any {
+export function getterCommon(//tslint:disable-line:parameters-max-number
+  target: any,
+  key: PropertyKey,
+  isStatic: boolean,
+  enumerable: boolean,
+  originalMethod: Function,
+  thisArg: any,
+  args: IArguments,
+  setProto: boolean,
+  makeNonConfigurable: boolean,
+  resultSelector: ResultSelectorFn
+): any {
   const value = originalMethod.apply(thisArg, <any>args);
 
   if (resultSelector(value)) {
