@@ -9,14 +9,16 @@ type DecoratorReturn = PropertyDescriptor | NewDescriptor;
 
 /**
  * Evaluate the getter function and cache the result
- * @param {boolean} [setProto=false] Set the value on the class prototype as well. Only applies to non-static getters.
- * @param {boolean} [makeNonConfigurable=false] Set to true to make the resolved property non-configurable
- * @param {ResultSelectorFn} [resultSelector] A filter function that must return true for the value to cached
+ * @param [setProto=false] Set the value on the class prototype as well. Only applies to non-static getters.
+ * @param [makeNonConfigurable=false] Set to true to make the resolved property non-configurable
+ * @param [resultSelector] A filter function that must return true for the value to cached
  * @return A decorator function
  */
-function LazyGetter(setProto?: boolean,
-                    makeNonConfigurable?: boolean,
-                    resultSelector: ResultSelectorFn = defaultFilter): MethodDecorator & ResettableDescriptor {
+function LazyGetter(
+  setProto = false,
+  makeNonConfigurable = false,
+  resultSelector: ResultSelectorFn = defaultFilter
+): MethodDecorator & ResettableDescriptor {
   let desc: PropertyDescriptor;
   let prop: PropertyKey;
   let args: IArguments = <any>null;

@@ -74,5 +74,14 @@
     "tslib": "~1.10.0",
     "typescript": "^3.5.3"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "browser": "_bundle/umd.js",
+  "jsdelivr": "_bundle/umd.min.js",
+  "fesm5": "_bundle/fesm5.js",
+  "esm5": "_bundle/fesm5.js",
+  "fesm2015": "_bundle/fesm2015.js",
+  "esm2015": "_bundle/fesm5.js",
+  "types": "LazyGetter.d.ts",
+  "module": "_bundle/fesm5.js",
+  "typings": "LazyGetter.d.ts"
 }

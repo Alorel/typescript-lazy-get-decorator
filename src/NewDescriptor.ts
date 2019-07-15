@@ -1,9 +1,10 @@
+/** ES7 proposal descriptor, tweaked for Babel */
 export interface NewDescriptor extends PropertyDescriptor {
   descriptor?: PropertyDescriptor;
 
-  readonly key: PropertyKey;
+  key: PropertyKey;
 
-  readonly kind: string;
+  kind: string;
 
   placement: string;
 }
