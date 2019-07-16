@@ -52,10 +52,10 @@
     fs-extra "^7.0.0"
     tslib "^1.6.0"
 
-"@alorel-personal/tslint-rules@5.0.3":
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/@alorel-personal/tslint-rules/-/tslint-rules-5.0.3.tgz#5953d412d2e2d24c76184922242b2b5317ac0b60"
-  integrity sha512-/V4PuRqA6ZlIuqYPNQThAIY+lxuQf/IRbO6agakH4CJIsQ70yYypodOqYS/ShK3EF4hyUm5qcSTe9gj53BNPXQ==
+"@alorel-personal/tslint-rules@5.0.4":
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@alorel-personal/tslint-rules/-/tslint-rules-5.0.4.tgz#91647fc404b0d9cb969f653afd537dfa55af7e5e"
+  integrity sha512-yV2V2fB0N6a1VTIVLEEBxur8wlHJyo/awV4X0+qLunLBs8d4bx15KQP03o4mpGE6qMxsNgYBfcqC7Nvx5YXSCQ==
   dependencies:
     tslint "^5.18.0"
     tslint-sonarts "^1.9.0"
