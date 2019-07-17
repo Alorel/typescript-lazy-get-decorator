@@ -52,10 +52,10 @@
     fs-extra "^7.0.0"
     tslib "^1.6.0"
 
-"@alorel-personal/tslint-rules@5.0.4":
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/@alorel-personal/tslint-rules/-/tslint-rules-5.0.4.tgz#91647fc404b0d9cb969f653afd537dfa55af7e5e"
-  integrity sha512-yV2V2fB0N6a1VTIVLEEBxur8wlHJyo/awV4X0+qLunLBs8d4bx15KQP03o4mpGE6qMxsNgYBfcqC7Nvx5YXSCQ==
+"@alorel-personal/tslint-rules@5.0.5":
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@alorel-personal/tslint-rules/-/tslint-rules-5.0.5.tgz#5ba764a57296608ef58a3b0cc46aaf06924802ed"
+  integrity sha512-CxHyF9ajKQDZvDef7BGVHZnziB0huW+xkmghr4kPBRJczc/FJ+5/E8IRoz3vNFbr9HPA0XW/y8/qOdrLi3c7Dg==
   dependencies:
     tslint "^5.18.0"
     tslint-sonarts "^1.9.0"
@@ -486,10 +486,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.3.tgz#44d507c5634f85e7164707ca36bba21b5213d487"
   integrity sha512-7TEYTQT1/6PP53NftXXabIZDaZfaoBdeBm8Md/i7zsWRoBe0YwOXguyK8vhHs8ehgB/w9U4K/6EWuTyp0W6nIA==
 
-"@types/node@~12.6.6":
-  version "12.6.6"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.6.tgz#831587377c35bb28fa33b6fe5f849a26a3f4a412"
-  integrity sha512-SMgj3x28MkJyHdWaMv/g/ca3LYDi5gR7O8mX0VKazvFOnmlDXctSEdd/8jfSqozjKFK1R9If1QZWkafX7yQTpA==
+"@types/node@~12.6.8":
+  version "12.6.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.8.tgz#e469b4bf9d1c9832aee4907ba8a051494357c12c"
+  integrity sha512-aX+gFgA5GHcDi89KG5keey2zf0WfZk/HAQotEamsK2kbey+8yGKcson0hbK8E+v0NArlCJQCqMP161YhV6ZXLg==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
