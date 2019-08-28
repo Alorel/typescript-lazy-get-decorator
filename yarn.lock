@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@alorel-personal/build-tools@4.7.3":
-  version "4.7.3"
-  resolved "https://registry.yarnpkg.com/@alorel-personal/build-tools/-/build-tools-4.7.3.tgz#679368692fadbb99f944e35665001025f4ea4129"
-  integrity sha512-8HcdN+nwrgF0WcLfTI917umk5Q81WboVszvm81rN/p8ePcG+QYrsC18pwa2tg1gO3z5Yh3wToghbapSPtOngWQ==
+"@alorel-personal/build-tools@4.7.4":
+  version "4.7.4"
+  resolved "https://registry.yarnpkg.com/@alorel-personal/build-tools/-/build-tools-4.7.4.tgz#07addf68a08c6cb4a62abf6fe972a1f1ab80de2e"
+  integrity sha512-rSt/VbdtZp6pRDsT41uV/912ml7VEJUwuo1KFLZNXneaN7lptS/TXLme1Z3DNDGRJlK68QPnYCaRtsPum63ASg==
   dependencies:
     chalk "^2.4.2"
     cross-spawn "^6.0.0"
@@ -24,16 +24,16 @@
     request "^2.88.0"
     request-promise "^4.2.4"
     rimraf "^3.0.0"
-    rollup "~1.19.1"
+    rollup "~1.20.2"
     rollup-plugin-node-resolve "^5.0.0"
-    rollup-plugin-typescript2 "^0.22.0"
+    rollup-plugin-typescript2 "^0.23.0"
     tmp "~0.1.0"
     tslib "^1.9.0"
     tslint "~5.18.0"
     typescript "^3.5.3"
     uglify-es "~3.3.9"
     yamljs "^0.3.0"
-    yargs "^13.3.0"
+    yargs "^14.0.0"
 
 "@alorel-personal/conventional-changelog-alorel@2.1.1":
   version "2.1.1"
@@ -486,10 +486,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.3.tgz#44d507c5634f85e7164707ca36bba21b5213d487"
   integrity sha512-7TEYTQT1/6PP53NftXXabIZDaZfaoBdeBm8Md/i7zsWRoBe0YwOXguyK8vhHs8ehgB/w9U4K/6EWuTyp0W6nIA==
 
-"@types/node@^12.6.9":
-  version "12.6.9"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.9.tgz#ffeee23afdc19ab16e979338e7b536fdebbbaeaf"
-  integrity sha512-+YB9FtyxXGyD54p8rXwWaN1EWEyar5L58GlGWgtH2I9rGmLGBQcw63+0jw+ujqVavNuO47S1ByAjm9zdHMnskw==
+"@types/node@^12.7.2":
+  version "12.7.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.2.tgz#c4e63af5e8823ce9cc3f0b34f7b998c2171f0c44"
+  integrity sha512-dyYO+f6ihZEtNPDcWNR1fkoTDf3zAK3lAABDze3mz6POyIercH0lEUawUFXlG8xaQZmm1yEBON/4TsYv/laDYg==
 
 "@types/node@~12.7.0":
   version "12.7.0"
@@ -526,10 +526,10 @@ abbrev@1, abbrev@~1.1.1:
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
   integrity sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==
 
-acorn@^6.2.1:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.2.1.tgz#3ed8422d6dec09e6121cc7a843ca86a330a86b51"
-  integrity sha512-JD0xT5FCRDNyjDda3Lrg/IxFscp9q4tiYtxE1/nOzlKCk7hIRuYjhq1kCNkbPjMRMZuFq20HNQn1I9k8Oj0E+Q==
+acorn@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.0.0.tgz#26b8d1cd9a9b700350b71c0905546f64d1284e7a"
+  integrity sha512-PaF/MduxijYYt7unVGRuds1vBC9bFxbNf+VWqhOClfdgy7RlVkQqt610ig1/yxTgsDIfW1cWDel5EBbOy3jdtQ==
 
 agent-base@4, agent-base@^4.3.0:
   version "4.3.0"
@@ -5090,10 +5090,10 @@ rollup-plugin-node-resolve@^5.0.0:
     resolve "^1.11.1"
     rollup-pluginutils "^2.8.1"
 
-rollup-plugin-typescript2@^0.22.0:
-  version "0.22.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-typescript2/-/rollup-plugin-typescript2-0.22.0.tgz#07bbcc3b24fe01125310ab5a6b9c993e8a6fed5e"
-  integrity sha512-jkccBtzTFLdZK7SoVlSDmaRiDgoq+P8n41pVSFYrrGq/OMR2fVW+O4Tnx7h39Ige0sGHKs2HuqJ8K6Ap0n785Q==
+rollup-plugin-typescript2@^0.23.0:
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-typescript2/-/rollup-plugin-typescript2-0.23.0.tgz#a2b6669ec606862fff62a74a628a838ebad6f108"
+  integrity sha512-LocTdy/rtp7UVoQcxqO3nIDjuI6AhfmiO/iNTx0k3uGRGPFQzlAyw5hEFNMpAT2tlpoGqawRnOT9OCePuwfZ5w==
   dependencies:
     fs-extra "8.1.0"
     resolve "1.11.1"
@@ -5107,14 +5107,14 @@ rollup-pluginutils@2.8.1, rollup-pluginutils@^2.8.1:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@~1.19.1:
-  version "1.19.2"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.19.2.tgz#64f74ef9b743cbc31e5aa226c7bce0a767cd9a33"
-  integrity sha512-nH8Sr5MMhdq+Se4w9RsJiwIFJ7eHNt+UyqR8a1WKlP36+ruJnzRoXMeSXicdRScAyDhrdQQR7GUX6W41qHlp+A==
+rollup@~1.20.2:
+  version "1.20.2"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.20.2.tgz#0e1be13cb5de244c9c463027092f7c93461558b9"
+  integrity sha512-pF4jFzNWMUuudIAeiTgOcSxn8XkBN2Y2/IwPR7iL/IZ8k9RwoLyp2QwNWiYT+HF537zwpmzZHTBYw345H9vq1A==
   dependencies:
     "@types/estree" "0.0.39"
-    "@types/node" "^12.6.9"
-    acorn "^6.2.1"
+    "@types/node" "^12.7.2"
+    acorn "^7.0.0"
 
 run-parallel@^1.1.9:
   version "1.1.9"
@@ -6305,12 +6305,29 @@ yargs@^12.0.1, yargs@^12.0.5:
     y18n "^3.2.1 || ^4.0.0"
     yargs-parser "^11.1.1"
 
-yargs@^13.1.0, yargs@^13.2.2, yargs@^13.3.0:
+yargs@^13.1.0, yargs@^13.2.2:
   version "13.3.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-13.3.0.tgz#4c657a55e07e5f2cf947f8a366567c04a0dedc83"
   integrity sha512-2eehun/8ALW8TLoIl7MVaRUrg+yCnenu8B4kBlRxj3GJGDKU1Og7sMXPNm1BYyM1DOJmTZ4YeN/Nwxv+8XJsUA==
   dependencies:
     cliui "^5.0.0"
+    find-up "^3.0.0"
+    get-caller-file "^2.0.1"
+    require-directory "^2.1.1"
+    require-main-filename "^2.0.0"
+    set-blocking "^2.0.0"
+    string-width "^3.0.0"
+    which-module "^2.0.0"
+    y18n "^4.0.0"
+    yargs-parser "^13.1.1"
+
+yargs@^14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-14.0.0.tgz#ba4cacc802b3c0b3e36a9e791723763d57a85066"
+  integrity sha512-ssa5JuRjMeZEUjg7bEL99AwpitxU/zWGAGpdj0di41pOEmJti8NR6kyUIJBkR78DTYNPZOU08luUo0GTHuB+ow==
+  dependencies:
+    cliui "^5.0.0"
+    decamelize "^1.2.0"
     find-up "^3.0.0"
     get-caller-file "^2.0.1"
     require-directory "^2.1.1"
