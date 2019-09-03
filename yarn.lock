@@ -2,13 +2,13 @@
 # yarn lockfile v1
 
 
-"@alorel-personal/build-tools@4.7.5":
-  version "4.7.5"
-  resolved "https://registry.yarnpkg.com/@alorel-personal/build-tools/-/build-tools-4.7.5.tgz#a8326c6d8d81716806f2baab1631afa7da1cdea5"
-  integrity sha512-FGse4DEVie+c0jV17anpar+bFvrfhXMNNrn38qdA67WqHVU83jS/VOqA61yklejUQaH1ODnyM8yx3noZc2PD7Q==
+"@alorel-personal/build-tools@4.7.6":
+  version "4.7.6"
+  resolved "https://registry.yarnpkg.com/@alorel-personal/build-tools/-/build-tools-4.7.6.tgz#1bdf29f1dc4f9b7119fcd9f95c380b4cf1b644a5"
+  integrity sha512-pZEG+vggLSwq8DLhadxsCdHUQtZGz0B4Jip28jCoRd4KgMcBUh7NZ/b/Qp8n4FBuqdTF4W2q8HU0ZmoyR48Z0g==
   dependencies:
     chalk "^2.4.2"
-    cross-spawn "^6.0.0"
+    cross-spawn "^7.0.0"
     custom-tslint-formatters "2.4.0"
     delete-empty "^3.0.0"
     fs-extra "^8.0.1"
@@ -1455,7 +1455,7 @@ cross-spawn@^6.0.0:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-cross-spawn@~7.0.0:
+cross-spawn@^7.0.0, cross-spawn@~7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.0.tgz#21ef9470443262f33dba80b2705a91db959b2e03"
   integrity sha512-6U/8SMK2FBNnB21oQ4+6Nsodxanw1gTkntYA2zBdkFYFu3ZDx65P2ONEXGSvob/QS6REjVHQ9zxzdOafwFdstw==
