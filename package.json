@@ -59,7 +59,7 @@
     "@types/lodash": "~4.14.122",
     "@types/mocha": "^5.2.6",
     "@types/node": "~12.12.3",
-    "babel-plugin-istanbul": "~5.2.0",
+    "babel-plugin-istanbul": "~6.0.0",
     "chai": "~4.2.0",
     "concurrently": "~5.0.0",
     "coveralls": "~3.0.5",
