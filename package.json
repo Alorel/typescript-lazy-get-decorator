@@ -46,7 +46,7 @@
     "@alorel-personal/conventional-changelog-alorel": "2.1.1",
     "@alorel-personal/semantic-release": "1.4.0",
     "@alorel-personal/tslint-rules": "5.0.6",
-    "@babel/cli": "~7.7.0",
+    "@babel/cli": "~7.8.0",
     "@babel/core": "~7.7.0",
     "@babel/plugin-proposal-class-properties": "~7.7.0",
     "@babel/plugin-proposal-decorators": "~7.7.0",
