@@ -57,7 +57,7 @@
     "@semantic-release/npm": "~5.3.1",
     "@types/chai": "^4.1.7",
     "@types/lodash": "~4.14.122",
-    "@types/mocha": "^5.2.6",
+    "@types/mocha": "^7.0.0",
     "@types/node": "~12.12.3",
     "babel-plugin-istanbul": "~5.2.0",
     "chai": "~4.2.0",
