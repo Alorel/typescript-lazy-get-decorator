@@ -1,0 +1,14 @@
+inputs: {}
+name: Set up
+description: Set up
+runs:
+  using: composite
+  steps:
+    - name: Set up node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: yarn
+    - name: Install deps
+      shell: bash
+      run: yarn install --check-files --ignore-engines

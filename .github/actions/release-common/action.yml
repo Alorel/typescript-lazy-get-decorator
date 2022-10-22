@@ -1,0 +1,18 @@
+inputs: {}
+name: Release (common)
+description: Common steps for the release
+runs:
+  using: composite
+  steps:
+    - name: Build
+      shell: bash
+      run: npm run build
+    - name: Copy files
+      shell: bash
+      run: ./node_modules/.bin/alo copy-files
+    - name: Clean pkg json
+      shell: bash
+      run: ./node_modules/.bin/alo clean-pkg-json
+    - name: Clean dist
+      shell: bash
+      run: ./node_modules/.bin/alo clean-dist
