@@ -1,6 +1,6 @@
 {
   "name": "lazy-get-decorator",
-  "version": "1.2.1",
+  "version": "2.2.0",
   "description": "Lazily evaluates a getter on an object and caches the returned value",
   "main": "LazyGetter.js",
   "es2015": "esm2015/LazyGetter.js",
