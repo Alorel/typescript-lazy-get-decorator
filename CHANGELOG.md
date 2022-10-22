@@ -1,3 +1,23 @@
+## [2.2.1](https://github.com/Alorel/typescript-lazy-get-decorator/compare/2.2.0...2.2.1) (2022-10-22)
+
+
+### Bug Fixes
+
+* fix path to "es2015" module ([057c970](https://github.com/Alorel/typescript-lazy-get-decorator/commit/057c970dd68a1c785313dbb14cf6797e587be2ce))
+
+
+### Maintenance
+
+* **deps:** bump fstream from 1.0.11 to 1.0.12 ([79e5b52](https://github.com/Alorel/typescript-lazy-get-decorator/commit/79e5b527614a89d59eb65f0b980fcca2b613489a))
+* **deps:** bump npm from 6.11.3 to 6.13.4 ([a75fe1d](https://github.com/Alorel/typescript-lazy-get-decorator/commit/a75fe1d14722ae9dfd28f829d294a91a1020117f))
+* Fix package.json version to match that on NPM ([99ea020](https://github.com/Alorel/typescript-lazy-get-decorator/commit/99ea0208184f125aa535ab534416db289b0dea7d))
+* Update dev dependencies ([063e960](https://github.com/Alorel/typescript-lazy-get-decorator/commit/063e960b569609b467edb01c8a13f4bc884b6445))
+
+
+### Refactoring
+
+* Refactored for updated tslint rules ([7bf0ded](https://github.com/Alorel/typescript-lazy-get-decorator/commit/7bf0dedbbb8c92a1b59ecd23179f30c232c06903))
+
 # [2.2.0](https://github.com/Alorel/typescript-lazy-get-decorator/compare/2.1.0...2.2.0) (2019-04-21)
 
 
