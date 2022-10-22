@@ -3,7 +3,6 @@
   "version": "2.2.0",
   "description": "Lazily evaluates a getter on an object and caches the returned value",
   "main": "LazyGetter.js",
-  "es2015": "esm2015/LazyGetter.js",
   "scripts": {
     "test:babel:legacy": "babel --config-file ./.babelrc.legacy -o test/LazyGetter.legacy.js test/LazyGetter.js",
     "test:babel:new": "babel --config-file ./.babelrc.new -o test/LazyGetter.new.js test/LazyGetter.js",
@@ -75,6 +74,7 @@
     "typescript": "~4.5.0"
   },
   "dependencies": {},
+  "es2015": "_bundle/fesm2015.js",
   "browser": "_bundle/umd.js",
   "jsdelivr": "_bundle/umd.min.js",
   "fesm5": "_bundle/fesm5.js",
