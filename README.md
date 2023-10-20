@@ -1,31 +1,28 @@
 # Lazy Get decorator
 
-[![Build Status](https://travis-ci.org/Alorel/typescript-lazy-get-decorator.png?branch=2.2.1)](https://travis-ci.org/Alorel/typescript-lazy-get-decorator)
-[![Coverage Status](https://coveralls.io/repos/github/Alorel/typescript-lazy-get-decorator/badge.svg?branch=2.2.1)](https://coveralls.io/github/Alorel/typescript-lazy-get-decorator?branch=2.2.1)
-[![Greenkeeper badge](https://badges.greenkeeper.io/Alorel/typescript-lazy-get-decorator.svg)](https://greenkeeper.io/)
+Getter decorator that memoises the return value
 
-[![NPM](https://nodei.co/npm/lazy-get-decorator.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/lazy-get-decorator)
+[![MASTER CI status](https://github.com/Alorel/typescript-lazy-get-decorator/actions/workflows/core.yml/badge.svg)](https://github.com/Alorel/typescript-lazy-get-decorator/actions/workflows/core.yml?query=branch%3Amaster)
+[![NPM badge](https://img.shields.io/npm/v/lazy-get-decorator)](https://www.npmjs.com/package/lazy-get-decorator)
+[![dependencies badge](https://img.shields.io/librariesio/release/npm/lazy-get-decorator)](https://libraries.io/npm/lazy-get-decorator)
+[![Coverage Status](https://coveralls.io/repos/github/Alorel/typescript-lazy-get-decorator/badge.svg)](https://coveralls.io/github/Alorel/typescript-lazy-get-decorator)
 
-Previously known as [typescript-lazy-get-decorator](https://www.npmjs.com/package/lazy-get-decorator).
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-# Compatibility
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Options](#options)
+  - [Using the result selector](#using-the-result-selector)
+- [Compatibility](#compatibility)
+- [Migrating from v2](#migrating-from-v2)
 
-- Typescript - full
-- Spec-compliant decorator proposal - full
-- Babel (current proposal) - full
-- Babel (legacy) - full
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# API
+# Installation
 
-```typescript
-/**
- * Evaluate the getter function and cache the result
- * @param {boolean} [setProto=false] Set the value on the class prototype as well. Only applies to non-static getters.
- * @param {boolean} [makeNonConfigurable=false] Set to true to make the resolved property non-configurable
- * @param {ResultSelectorFn} [resultSelector] A filter function that must return true for the value to cached
- * @return A Typescript decorator function
- */
-function LazyGetter(setProto?: boolean, makeNonConfigurable?: boolean, resultSelector?: (value: any) => boolean): MethodDecorator;
+```shell
+npm install lazy-get-decorator
 ```
 
 # Usage
@@ -33,140 +30,83 @@ function LazyGetter(setProto?: boolean, makeNonConfigurable?: boolean, resultSel
 ```typescript
 import {LazyGetter} from 'lazy-get-decorator';
 
-class AClass {
-
-    @LazyGetter()
-    get lazyNoProto(): string {
-        console.log('Evaluating lazyNoProto');
-
-        return 'lazyNoProtoValue';
-    }
-
-    @LazyGetter(true)
-    get lazyWithProto(): string {
-        console.log('Evaluating lazyWithProto');
-
-        return 'lazyWithProtoValue';
-    }
-}
-
-const inst1 = new AClass();
-
-console.log('==== inst 1 ====\n');
-
-console.log(inst1.lazyNoProto);
-console.log(inst1.lazyNoProto);
-console.log(inst1.lazyWithProto);
-console.log(inst1.lazyWithProto);
-
-const inst2 = new AClass();
-
-console.log('\n\n==== inst 2 ====\n');
-
-console.log(inst2.lazyNoProto);
-console.log(inst2.lazyNoProto);
-console.log(inst2.lazyWithProto);
-console.log(inst2.lazyWithProto);
-```
-
-Output:
-
-    ==== inst 1 ====
-
-    Evaluating lazyNoProto
-    lazyNoProtoValue
-    lazyNoProtoValue
-    Evaluating lazyWithProto
-    lazyWithProtoValue
-    lazyWithProtoValue
-
-
-    ==== inst 2 ====
-
-    Evaluating lazyNoProto
-    lazyNoProtoValue
-    lazyNoProtoValue
-    lazyWithProtoValue
-    lazyWithProtoValue
-
-# Using the result selector
-
-```typescript
-import {LazyGetter} from 'lazy-get-decorator';
-
 class MyClass {
-  public readonly someCondition = 10;
+  @LazyGetter(/* optional config */)
+  get foo(): number {
+    // ...
+  } 
   
-  @LazyGetter(false, false, (v: number) => v === 10)
-  public get prop1(): number {
-    // This will get cached
-    return this.someCondition;
-  }
-  
-  @LazyGetter(false, false, (v: number) => v === 1)
-  public get prop2(): number {
-    // This won't get cached
-    return this.someCondition;
+  @LazyGetter(/* optional config */)
+  static get bar(): string {
+    // ...
   }
 }
 ```
 
-# Resetting LazyGetter
+## Options
 
-The cached value can be reset if the decorator does not modify the class prototype,
-i.e. is not called as `@LazyGetter(true)`:
+All options are optional
 
-```typescript
-import {LazyGetter} from 'lazy-get-decorator';
+| Name     | Type                                         | Default | Description                                                                                                                                                                                                      |
+|----------|----------------------------------------------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `global` | `boolean`                                    | `false` | If set to true, the lazy getter triggering on one class instance will end up saving the returned value on all class instances, current and future. Has no effect on static getters.                              |
+| `select` | `<T, R>(this: T, output: R, self: T) => any` |         | A function to determine whether we should save the results (returning a truthy value) or continue calling the original getter (returning a falsy value). The default behaviour is to always save the 1st result. |
 
-const instanceDec = LazyGetter();
-const staticDec = LazyGetter();
+## Using the result selector
 
-class MyClass {
-  public instanceCount = 0;
-  public static staticCount = 0;
-  
-  @instanceDec
-  public get count(): number {
-    return this.instanceCount++;
-  }
-  
-  @staticDec
-  public static get count(): number {
-    return MyClass.staticCount++;
-  }
-}
-
-const inst = new MyClass();
-
-console.log(inst.count); // 0
-console.log(inst.count); // 0
-instanceDec.reset(inst);
-console.log(inst.count); // 1
-
-console.log(MyClass.count); // 0
-console.log(MyClass.count); // 0
-staticDec.reset(MyClass);
-console.log(MyClass.count); // 1
-```
-
-Resetting the decoration performs the following steps:
-
-1. Resets the property descriptor to its state before the decoration
-1. Re-applies the decorator
-
-This means that any descriptor changes made by other decorators may be lost, therefore you
-should ensure `LazyGetter` is applied last if you intend on resetting it, i.e. place it
-at the very top of your decorators list:
+The following example will save the value only if the counter is `10` or above. The selector executes after the getter
+function, hence the offset of 1: the current value of 9 is returned and passed on to the result selector, but the
+counter value is already incremented at this point.
 
 ```typescript
 class MyClass {
-
-  @LazyGetter()
-  @decorator2
-  @decorator1
-  get getter() {
-    return 1;
+  #counter = 0;
+  
+  @LazyGetter({select: v => v === 9})
+  get timesAccessed(): number {
+    return this.#counter++;
   }
 }
 ```
+
+# Compatibility
+
+The library's only goal is to be compatible with Typescript 5 decorators which, at the time of writing, use the [2022-03 stage 3 decorators proposal](https://2ality.com/2022/10/javascript-decorators.html).
+If you need experimental TS decorators or can't use a suitable Babel transform just stick to v2 - there are no new features in this release.
+
+Typescript has further gotchas depending on the compiler target you've set.
+
+ES2022 and higher allows you to use a class' method as a result selector:
+
+```typescript
+class MyClass {
+  static shouldMemoiseStatic = false;
+  shouldMemoiseInstance = true;
+  
+  @LazyGetter({select: MyClass.bar})
+  static get foo() {}
+
+  @LazyGetter({select: MyClass.prototype.bar2})
+  get foo2() {}
+
+  static bar() {
+    return this.shouldMemoiseStatic;
+  }
+  
+  bar2() {
+    return this.shouldMemoiseInstance;
+  }
+}
+```
+
+Attempting to do this on ES2021 or lower will result in a runtime error as of Typescript 5.2.
+
+# Migrating from v2
+
+- The function signature has changed to accept an object instead of multiple arguments
+- `makeNonConfigurable` option removed
+- `setProto` option renamed to `global`
+- The only officially supported version is now the non-experimental decorators of Typescript 5 - see [compatibility](#compatibility)
+- The ability to reset a memoised getter has been removed.
+   - If you need to do this as part of your unit tests, use a different class every time. The library's test suites have a few variations of this pattern - creating classes through a helper function, running similar tests through a helper function that accepts a class
+   - If you need this at runtime then it's not a lazy getter you have - add whatever checks you need in your getter's logic and don't decorate it

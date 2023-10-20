@@ -1,0 +1,14 @@
+reporter:
+  - text
+  - text-summary
+  - html
+  - lcov
+extension:
+  - .ts
+require:
+  - source-map-support/register
+exclude:
+  - src/test.ts
+  - src/test-esnext-only.ts
+sourceMap: true
+instrument: true

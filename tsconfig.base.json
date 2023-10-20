@@ -1,27 +1,37 @@
 {
-   "compilerOptions": {
-      "moduleResolution": "node",
-      "target": "es5",
-      "noUnusedLocals": true,
-      "declaration": false,
-      "noImplicitAny": true,
-      "newLine": "lf",
-      "noFallthroughCasesInSwitch": true,
-      "suppressImplicitAnyIndexErrors": true,
-      "experimentalDecorators": true,
-      "emitDecoratorMetadata": false,
-      "removeComments": false,
-      "importHelpers": true,
-      "allowUnreachableCode": false,
-      "allowUnusedLabels": false,
-      "stripInternal": true,
-      "lib": [
-         "es2017",
-         "ScriptHost"
-      ]
-   },
-   "exclude": [
-      "node_modules",
-      "dist"
-   ]
+  "compilerOptions": {
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "module": "ESNext",
+    "useDefineForClassFields": false,
+    "noUnusedParameters": true,
+    "newLine": "lf",
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "importHelpers": true,
+    "exactOptionalPropertyTypes": false,
+    "noUncheckedIndexedAccess": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "useUnknownInCatchVariables": false,
+    "outDir": "dist",
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": false,
+    "strict": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": false,
+    "jsxFactory": "h",
+    "target": "ES2021",
+    "noImplicitReturns": false,
+    "noImplicitThis": true,
+    "strictBindCallApply": true,
+    "assumeChangesOnlyAffectDirectDependencies": true,
+    "stripInternal": true
+  }
 }
