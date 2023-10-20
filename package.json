@@ -1,6 +1,6 @@
 {
   "name": "lazy-get-decorator",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "Lazily evaluates a getter on an object and caches the returned value",
   "main": "cjs/index.js",
   "module": "es/index.js",
