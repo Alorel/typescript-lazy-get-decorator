@@ -1,51 +1,231 @@
 name: Core
 on:
-  - push
-  - pull_request
+  push:
+    branches: [master]
+  pull_request: {}
+
+permissions:
+  contents: read
+  packages: read
 
 jobs:
   test:
-    name: Test
+    name: Test & Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      - name: Set up
-        uses: ./.github/actions/setup
+        uses: actions/checkout@v4
+
+      - uses: ./.github/actions/init-node
+        name: Set up node
+        with:
+          cache: npm
+          registry-url: https://npm.pkg.github.com
+
+      - name: Install deps
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ github.token }}
+
       - name: Lint
         run: npm run lint
-      - name: Test
-        run: npm test
+
+      - name: "Test: es2017"
+        run: npm run test:es2017
+
+      - name: "Test: es2022"
+        run: npm run test:es2022
+
+      - name: Build
+        run: npm run build
+
+      - uses: actions/upload-artifact@v3
+        name: Upload dist
+        if: ${{ github.ref == 'refs/heads/master' }}
+        with:
+          name: dist
+          retention-days: 1
+          path: dist/
+          if-no-files-found: error
+
       - name: Upload coverage
         continue-on-error: true
-        uses: coverallsapp/github-action@v1.1.2
+        uses: coverallsapp/github-action@v2.2.3
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
-  release:
-    name: Release
+          files: ./coverage/es2017/lcov.info ./coverage/es2022/lcov.info
+  
+  changelog:
+    name: Changelog
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
     needs:
       - test
+    outputs:
+      changelog: ${{ steps.log.outputs.changelog }}
+      release-type: ${{ steps.log.outputs.release-type }}
+      issues-closed: ${{ steps.log.outputs.issues-closed }}
+      should-release: ${{ steps.log.outputs.should-release }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      - name: Set up
-        uses: ./.github/actions/setup
-      - name: Release (common)
-        uses: ./.github/actions/release-common
-      - name: Release
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-        run: ./node_modules/.bin/semantic-release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Release (dry run)
-        if: ${{ github.event_name != 'push' || github.ref != 'refs/heads/master' }}
-        run: ./node_modules/.bin/semantic-release --dry-run
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
 
+      - name: Conditional args
+        id: args
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
+        run: >
+          echo "before=${{ github.ref_name }}" >> $GITHUB_OUTPUT &&
+          echo "until=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+
+      - name: Get last tag
+        id: last-tag
+        uses: alorel-actions/semantic-release-lite/last-tag@v0
+        with:
+          before: ${{ steps.args.outputs.before }}
+
+      - name: Generate changelog
+        id: log
+        uses: alorel-actions/semantic-release-lite/generate-changelog@v0
+        with:
+          last-tag: ${{ steps.last-tag.outputs.last-tag }}
+          from: ${{ steps.last-tag.outputs.last-tag }}
+          until: ${{ steps.args.outputs.until || github.sha }}
+          minor-types: |
+            feat: Features
+          patch-types: |
+            fix: Bug Fixes
+            perf: Performance
+          trivial-types: |
+            chore: Maintenance
+            deps: Dependency updates
+            ci: CI & Build
+            build: CI & Build
+            refactor: Refactors
+            docs: Documentation
+
+  release-git:
+    name: "Release: Git"
+    runs-on: ubuntu-latest
+    if: ${{ needs.changelog.outputs.should-release == 'true' }}
+    needs:
+      - changelog
+      - test
+    outputs:
+      sha: ${{ steps.sha.outputs.sha }}
+      next-version: ${{ steps.bump.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Git identity
+        uses: alorel-actions/git-ident@v1
+
+      - name: Init Node
+        uses: ./.github/actions/init-node
+
+      - name: Bump version
+        id: bump
+        run: echo "version=$(npm version ${{ needs.changelog.outputs.release-type }})" >> $GITHUB_OUTPUT
+
+      - name: Output SHA
+        id: sha
+        shell: bash
+        run: echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Push commit
+        run: git push
+
+      - name: Push tags
+        run: git push --tags
+  
+  release-npm:
+    name: "Release: NPM"
+    runs-on: ubuntu-latest
+    if: ${{ needs.changelog.outputs.should-release == 'true' }}
+    needs:
+      - changelog
+      - test
+      - release-git
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          ref: ${{ needs.release-git.outputs.sha }}
+
+      - name: Init Node
+        uses: ./.github/actions/init-node
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          registry-url: https://registry.npmjs.org
+
+      - name: Download dist
+        uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist
+
+      - name: Copy over bumped package.json
+        working-directory: dist
+        run: cp ../package.json package.json
+
+      - name: Publish
+        working-directory: dist
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  
+  release-github:
+    name: "Release: GitHub"
+    runs-on: ubuntu-latest
+    if: ${{ needs.changelog.outputs.should-release == 'true' }}
+    permissions:
+      contents: write
+    needs:
+      - changelog
+      - test
+      - release-git
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          ref: ${{ needs.release-git.outputs.sha }}
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: false
+          prerelease: false
+          generateReleaseNotes: false
+          commit: ${{ needs.release-git.outputs.sha }}
+          tag: ${{ needs.release-git.outputs.next-version }}
+          body: ${{ needs.changelog.outputs.changelog }}
+  
+  notify:
+    name: Notify issues
+    runs-on: ubuntu-latest
+    if: ${{ needs.changelog.outputs.should-release == 'true' && needs.changelog.outputs.issues-closed }}
+    needs:
+      - changelog
+      - test
+      - release-npm
+      - release-git
+      - release-github
+    permissions:
+      contents: write
+    steps:
+      - name: Notify
+        uses: alorel-actions/semantic-release-lite/notify@v0
+        with:
+          tag: ${{ needs.release-git.outputs.next-version }}
+          issues: ${{ needs.changelog.outputs.issues-closed }}
+          allow-out-of-sync: true
