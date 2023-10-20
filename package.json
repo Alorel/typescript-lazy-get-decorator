@@ -2,15 +2,37 @@
   "name": "lazy-get-decorator",
   "version": "2.2.0",
   "description": "Lazily evaluates a getter on an object and caches the returned value",
-  "main": "LazyGetter.js",
+  "main": "cjs/index.js",
+  "module": "es/index.js",
+  "types": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm": "./es/index.js",
+      "module": "./es/index.js",
+      "import": "./es/index.js",
+      "node": "./cjs/index.js",
+      "default": "./cjs/index.js"
+    }
+  },
   "scripts": {
-    "test:babel:legacy": "babel --config-file ./.babelrc.legacy -o test/LazyGetter.legacy.js test/LazyGetter.js",
-    "test:babel:new": "babel --config-file ./.babelrc.new -o test/LazyGetter.new.js test/LazyGetter.js",
-    "test:compile": "concurrently -n tsc:test \"tsc -p tsconfig.test.json\" \"npm:test:babel:*\"",
-    "test": "nyc mocha --check-leaks --exit --full-trace test/LazyGetter.legacy.js test/LazyGetter.new.js test/LazyGetter.typescript.js",
-    "pretest": "concurrently -n build:src,build:test,clean \"alo build --targets cjs\" \"npm run test:compile && ts-node pretest-postprocess.ts\" \"rimraf coverage\"",
-    "build": "alo build",
-    "lint": "alo tslint -p ./tsconfig.lib.json",
+    "clean": "rm -rfv dist && mkdir dist",
+    "build": "concurrently npm:build:*",
+    "build:es": "tsc --outDir dist/es",
+    "build:cjs": "tsc --outDir dist/cjs --module commonjs",
+    "build:dts": "tsc --outDir dist --declaration --emitDeclarationOnly",
+    "build:cp": "cp -v LICENSE README.md package.json .npmrc dist/",
+    "watch": "npm --scripts-prepend-node-path=auto run clean  && tsc --watch",
+    "prewatch": "npm --scripts-prepend-node-path=auto run clean",
+    "prebuild": "npm --scripts-prepend-node-path=auto run clean",
+    "doctoc": "doctoc --github README.md",
+    "test:es2022": "TS_NODE_PROJECT=tsconfig.test.json nyc --report-dir coverage/es2022 mocha src/test.ts",
+    "test:es2017": "TS_NODE_COMPILER_OPTIONS=\"{\\\"target\\\":\\\"ES2017\\\"}\" TS_NODE_PROJECT=tsconfig.test.json nyc --report-dir coverage/es2017 mocha src/test.ts",
+    "test:watch": "npm --scripts-prepend-node-path=auto run test:es2022 -- --watch",
+    "lint": "eslint src --ext .ts",
     "lint:fix": "npm --scripts-prepend-node-path=auto run lint -- --fix"
   },
   "repository": {
@@ -19,7 +41,6 @@
   },
   "keywords": [
     "typescript",
-    "babel",
     "lazy get",
     "lazy getter",
     "lazy",
@@ -31,9 +52,9 @@
     "decorator"
   ],
   "author": {
-    "name": "Arturas Molcanovas",
+    "name": "Artūras Molčanovas",
     "url": "https://alorel.github.io",
-    "email": "a.molcanovas@gmail.com"
+    "email": "amolc@pm.me"
   },
   "license": "LGPL-3.0-only",
   "bugs": {
@@ -41,47 +62,21 @@
   },
   "homepage": "https://github.com/Alorel/typescript-lazy-get-decorator",
   "devDependencies": {
-    "@alorel-personal/build-tools": "4.7.19",
-    "@alorel-personal/conventional-changelog-alorel": "^2.1.3",
-    "@alorel-personal/semantic-release": "^1.4.0",
-    "@alorel-personal/tslint-rules": "^5.0.7",
-    "@babel/cli": "^7.19.3",
-    "@babel/core": "^7.19.6",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-proposal-decorators": "^7.19.6",
-    "@semantic-release/changelog": "^6.0.1",
-    "@semantic-release/exec": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^8.0.6",
-    "@semantic-release/npm": "^9.0.1",
-    "@types/chai": "~4.2.0",
-    "@types/lodash": "4.14.122",
-    "@types/mocha": "^10.0.0",
-    "@types/node": "12.12.3",
-    "babel-plugin-istanbul": "^6.1.1",
-    "chai": "^4.3.6",
-    "concurrently": "^7.5.0",
-    "coveralls": "^3.1.1",
-    "cross-spawn": "^7.0.3",
-    "lodash": "^4.17.21",
-    "mocha": "^10.1.0",
+    "@alorel/eslint-config-base": "^1.0.18",
+    "@alorel/eslint-config-typescript": "^1.0.17",
+    "@types/chai": "^4.3.8",
+    "@types/mocha": "^10.0.2",
+    "@types/node": "^20.8.5",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "@typescript-eslint/parser": "^6.7.5",
+    "chai": "^4.3.10",
+    "concurrently": "^8.2.1",
+    "doctoc": "^2.2.1",
+    "eslint": "^8.51.0",
+    "mocha": "^10.2.0",
     "nyc": "^15.1.0",
-    "rimraf": "^3.0.2",
-    "semantic-release": "^19.0.5",
     "source-map-support": "^0.5.21",
     "ts-node": "^10.9.1",
-    "tslib": "^2.4.0",
-    "typescript": "~4.5.0"
-  },
-  "dependencies": {},
-  "es2015": "_bundle/fesm2015.js",
-  "browser": "_bundle/umd.js",
-  "jsdelivr": "_bundle/umd.min.js",
-  "fesm5": "_bundle/fesm5.js",
-  "esm5": "_bundle/fesm5.js",
-  "fesm2015": "_bundle/fesm2015.js",
-  "esm2015": "_bundle/fesm5.js",
-  "types": "LazyGetter.d.ts",
-  "module": "_bundle/fesm5.js",
-  "typings": "LazyGetter.d.ts"
+    "typescript": "^5.2.2"
+  }
 }

@@ -1,0 +1,7 @@
+check-leaks: true
+exit: true
+full-trace: true
+forbid-only: true
+require: 
+  - source-map-support/register
+  - ts-node/register
